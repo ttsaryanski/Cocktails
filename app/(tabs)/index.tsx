@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import {
     ActivityIndicator,
     FlatList,
@@ -13,11 +12,17 @@ import { cocktailServices } from "../../services/cocktailServices";
 
 import CocktailCard from "../../components/cocktail-card";
 
+import TrendingCocktailCard from "../../components/trending-cocktail-card";
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
+import { getTrendingCocktails } from "../../utils/appwrite";
 
 export default function Index() {
-    const router = useRouter();
+    const {
+        data: trendingCocktails,
+        loading: trendingLoading,
+        error: trendingError,
+    } = useFetch(getTrendingCocktails);
 
     const {
         data: cocktails,
@@ -39,18 +44,48 @@ export default function Index() {
                     className="w-16 h-16 mt-10 mb-1 mx-auto"
                 />
 
-                {cocktailsLoading ? (
+                {cocktailsLoading || trendingLoading ? (
                     <ActivityIndicator
                         size="large"
                         color="#0000ff"
                         className="mt-10 self-center"
                     />
-                ) : cocktailsError ? (
+                ) : cocktailsError || trendingError ? (
                     <Text style={{ color: "white" }}>
-                        Error: {cocktailsError?.message}
+                        Error:{" "}
+                        {cocktailsError?.message || trendingError?.message}
                     </Text>
                 ) : (
                     <View className="flex-1 mt-1">
+                        {trendingCocktails && (
+                            <View className="mt-10">
+                                <Text className="text-lg text-white text-center font-bold mb-3">
+                                    Trending cocktails
+                                </Text>
+                                <FlatList
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                    className="mb-4 mt-3"
+                                    data={trendingCocktails}
+                                    contentContainerStyle={{
+                                        gap: 26,
+                                    }}
+                                    renderItem={({ item, index }) => (
+                                        <TrendingCocktailCard
+                                            cocktail={item}
+                                            index={index}
+                                        />
+                                    )}
+                                    keyExtractor={(item) =>
+                                        item.cocktail_id.toString()
+                                    }
+                                    ItemSeparatorComponent={() => (
+                                        <View className="w-4" />
+                                    )}
+                                />
+                            </View>
+                        )}
+
                         <Text className="text-lg text-white text-center font-bold mt-5 mb-3">
                             Random Cocktails
                         </Text>

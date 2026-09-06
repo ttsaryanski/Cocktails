@@ -55,3 +55,11 @@ interface Cocktail {
     strCreativeCommonsConfirmed?: string;
     dateModified?: string;
 }
+
+interface TrendingCocktail {
+    searchTerm: string;
+    cocktail_id: number;
+    title: string;
+    count: number;
+    img_url: string;
+}
