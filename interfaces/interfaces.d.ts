@@ -1,4 +1,8 @@
-interface Drink {
+interface Cocktails {
+    drinks: Drink[];
+}
+
+interface Cocktail {
     idDrink: string;
     strDrink: string;
     strDrinkAlternate?: string;

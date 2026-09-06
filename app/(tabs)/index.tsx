@@ -1,30 +1,29 @@
 import { useRouter } from "expo-router";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import {
+    ActivityIndicator,
+    FlatList,
+    Image,
+    ScrollView,
+    Text,
+    View,
+} from "react-native";
 
-import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { cocktailServices } from "../../services/cocktailServices";
+
 import CocktailCard from "../../components/cocktail-card";
-import SearchBar from "../../components/search-bar";
+
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
-import { coocktailServices } from "../../services/coocktailServices";
-import { RandomCoocktails } from "../../types/coocktails";
 
 export default function Index() {
     const router = useRouter();
-    const [data, setData] = useState<RandomCoocktails>();
 
-    useEffect(() => {
-        const fetchData = async (): Promise<void> => {
-            try {
-                const res = await coocktailServices.getRandom();
-                setData(res);
-            } catch (error) {
-                throw error;
-            }
-        };
-
-        fetchData();
-    }, []);
+    const {
+        data: cocktails,
+        loading: cocktailsLoading,
+        error: cocktailsError,
+    } = useFetch(() => cocktailServices.getRandom());
 
     return (
         <View className="flex-1 bg-primary">
@@ -37,28 +36,32 @@ export default function Index() {
             >
                 <Image
                     source={icons.logo}
-                    className="w-16 h-16 mt-20 mb-5 mx-auto"
+                    className="w-16 h-16 mt-10 mb-1 mx-auto"
                 />
 
-                <View className="flex-1 mt-5">
-                    <SearchBar
-                        onPress={() => {
-                            router.push("/search");
-                        }}
-                        placeholder="Search for a cocktail"
+                {cocktailsLoading ? (
+                    <ActivityIndicator
+                        size="large"
+                        color="#0000ff"
+                        className="mt-10 self-center"
                     />
-                    <>
-                        <Text className="text-lg text-white font-bold mt-5 mb-3">
-                            Random Coocktails
+                ) : cocktailsError ? (
+                    <Text style={{ color: "white" }}>
+                        Error: {cocktailsError?.message}
+                    </Text>
+                ) : (
+                    <View className="flex-1 mt-1">
+                        <Text className="text-lg text-white text-center font-bold mt-5 mb-3">
+                            Random Cocktails
                         </Text>
 
                         <FlatList
-                            data={data?.drinks}
+                            data={cocktails?.drinks}
                             renderItem={({ item }) => (
                                 <CocktailCard {...item} />
                             )}
                             keyExtractor={(item) => item.idDrink.toString()}
-                            numColumns={3}
+                            numColumns={2}
                             columnWrapperStyle={{
                                 justifyContent: "flex-start",
                                 gap: 20,
@@ -68,8 +71,8 @@ export default function Index() {
                             className="mt-2 pb-32"
                             scrollEnabled={false}
                         />
-                    </>
-                </View>
+                    </View>
+                )}
             </ScrollView>
         </View>
     );

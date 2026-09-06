@@ -1,11 +1,11 @@
 {
     "expo": {
-        "name": "Coocktails",
-        "slug": "Coocktails",
+        "name": "Cocktails",
+        "slug": "Cocktails",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/cocktail.png",
-        "scheme": "coocktails",
+        "scheme": "cocktails",
         "userInterfaceStyle": "automatic",
         "ios": {
             "icon": "./assets/expo.icon"
