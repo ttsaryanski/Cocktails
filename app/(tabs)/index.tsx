@@ -2,6 +2,7 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
+    RefreshControl,
     ScrollView,
     Text,
     View,
@@ -22,13 +23,19 @@ export default function Index() {
         data: trendingCocktails,
         loading: trendingLoading,
         error: trendingError,
+        refetch: trendingRefetch,
     } = useFetch(getTrendingCocktails);
 
     const {
         data: cocktails,
         loading: cocktailsLoading,
         error: cocktailsError,
+        refetch: cocktailsRefetch,
     } = useFetch(() => cocktailServices.getRandom());
+
+    const handleRefresh = async () => {
+        await Promise.all([trendingRefetch(), cocktailsRefetch()]);
+    };
 
     return (
         <View className="flex-1 bg-primary">
@@ -38,6 +45,13 @@ export default function Index() {
                 className="flex-1 px-5"
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={trendingLoading || cocktailsLoading}
+                        onRefresh={handleRefresh}
+                        tintColor="#AB8BFF"
+                    />
+                }
             >
                 <Image
                     source={icons.logo}
