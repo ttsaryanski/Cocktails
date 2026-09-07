@@ -27,7 +27,7 @@ const CoocktailCard = ({
                     {strDrink}
                 </Text>
 
-                {strAlcoholic !== "Alcoholic" ? (
+                {strAlcoholic === "Non alcoholic" ? (
                     <View className="self-start bg-green-500 rounded-md p-1">
                         <Text className="text-xs text-white">
                             {strAlcoholic}

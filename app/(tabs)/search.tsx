@@ -45,7 +45,7 @@ const Search = () => {
 
             try {
                 const results =
-                    await cocktailServices.getByCoktailName(trimmedQuery);
+                    await cocktailServices.searchByName(trimmedQuery);
 
                 if (!cancelled) {
                     setSearchResults(results);
