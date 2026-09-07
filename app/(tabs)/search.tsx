@@ -3,9 +3,11 @@ import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 
 import useFetch from "../../hooks/useFetch";
 import { cocktailServices } from "../../services/cocktailServices";
+import { updateSearchCount } from "../../utils/appwrite";
 
 import CocktailCard from "../../components/cocktail-card";
 import SearchBar from "../../components/search-bar";
+
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
 
@@ -47,6 +49,10 @@ const Search = () => {
 
                 if (!cancelled) {
                     setSearchResults(results);
+                }
+
+                if (results?.drinks?.length > 0 && results?.drinks[0]) {
+                    await updateSearchCount(query, results?.drinks[0]);
                 }
             } catch (error) {
                 if (!cancelled) {

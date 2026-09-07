@@ -58,7 +58,7 @@ export default function Index() {
                 ) : (
                     <View className="flex-1 mt-1">
                         {trendingCocktails && (
-                            <View className="mt-10">
+                            <View className="mt-3">
                                 <Text className="text-lg text-white text-center font-bold mb-3">
                                     Trending cocktails
                                 </Text>

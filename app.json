@@ -1,42 +1,43 @@
 {
-    "expo": {
-        "name": "Cocktails",
-        "slug": "Cocktails",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/images/cocktail.png",
-        "scheme": "cocktails",
-        "userInterfaceStyle": "automatic",
-        "ios": {
-            "icon": "./assets/expo.icon"
-        },
-        "android": {
-            "adaptiveIcon": {
-                "backgroundColor": "#6bb3ff",
-                "foregroundImage": "./assets/images/cocktail_foreground.png",
-                "backgroundImage": "./assets/images/cocktail_round.png",
-                "monochromeImage": "./assets/images/cocktail.png"
-            },
-            "predictiveBackGestureEnabled": false
-        },
-        "web": {
-            "output": "static",
-            "favicon": "./assets/images/cocktail-256x256.png"
-        },
-        "plugins": [
-            "expo-router",
-            [
-                "expo-splash-screen",
-                {
-                    "backgroundColor": "#208AEF",
-                    "image": "./assets/images/cocktail.png",
-                    "imageWidth": 76
-                }
-            ]
-        ],
-        "experiments": {
-            "typedRoutes": true,
-            "reactCompiler": true
+  "expo": {
+    "name": "Cocktails",
+    "slug": "Cocktails",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/cocktail.png",
+    "scheme": "cocktails",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/expo.icon"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#6bb3ff",
+        "foregroundImage": "./assets/images/cocktail_foreground.png",
+        "backgroundImage": "./assets/images/cocktail_round.png",
+        "monochromeImage": "./assets/images/cocktail.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/cocktail-256x256.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#208AEF",
+          "image": "./assets/images/cocktail.png",
+          "imageWidth": 76
         }
+      ],
+      "expo-image"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
     }
+  }
 }
