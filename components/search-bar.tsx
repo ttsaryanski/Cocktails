@@ -1,4 +1,4 @@
-import { Image, TextInput, View } from "react-native";
+import { Image, Pressable, Text, TextInput, View } from "react-native";
 
 import { icons } from "../constants/icons";
 
@@ -10,8 +10,12 @@ interface Props {
 }
 
 const SearchBar = ({ onPress, onChangeText, placeholder, value }: Props) => {
+    const onClear = () => {
+        onChangeText?.("");
+    };
+
     return (
-        <View className="flex-row items-center bg-dark-200 rounded-full px-5 py-4">
+        <View className="flex-row items-center bg-dark-200 rounded-full pl-5 py-4">
             <Image
                 source={icons.search}
                 className="size-5"
@@ -27,6 +31,18 @@ const SearchBar = ({ onPress, onChangeText, placeholder, value }: Props) => {
                 placeholderTextColor="#a8b5db"
                 className="flex-1 ml-2 text-white"
             />
+
+            {!!value && (
+                <Pressable
+                    onPress={onClear}
+                    className="mr-2 rounded-full"
+                    style={{ backgroundColor: "#AB8BFF" }}
+                >
+                    <Text className=" p-3" style={{ color: "#221F3D" }}>
+                        Clear
+                    </Text>
+                </Pressable>
+            )}
         </View>
     );
 };
