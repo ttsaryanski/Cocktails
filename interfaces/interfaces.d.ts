@@ -63,3 +63,8 @@ interface TrendingCocktail {
     count: number;
     img_url: string;
 }
+
+interface CocktailInfoProps {
+    label: string;
+    value?: string | number | null;
+}
