@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const useFetch = <T>(fetchFunction: () => Promise<T>, autoFetch = true) => {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
+    const fetchFunctionRef = useRef(fetchFunction);
 
-    const fetchData = async (): Promise<void> => {
+    fetchFunctionRef.current = fetchFunction;
+
+    const fetchData = useCallback(async (): Promise<void> => {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetchFunction();
+            const res = await fetchFunctionRef.current();
             setData(res);
         } catch (error) {
             setError(
@@ -20,7 +23,7 @@ const useFetch = <T>(fetchFunction: () => Promise<T>, autoFetch = true) => {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     const reset = () => {
         setData(null);
@@ -32,7 +35,7 @@ const useFetch = <T>(fetchFunction: () => Promise<T>, autoFetch = true) => {
         if (autoFetch) {
             fetchData();
         }
-    }, []);
+    }, [autoFetch, fetchData]);
 
     return { data, loading, error, refetch: fetchData, reset };
 };

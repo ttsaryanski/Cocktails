@@ -13,6 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import useFetch from "../../hooks/useFetch";
 import { cocktailServices } from "../../services/cocktailServices";
 import { extractIngredients } from "../../utils/extractIngredients";
+import {
+    deleteLocalCocktail,
+    getLocalSavedCocktails,
+    saveLocalCocktail,
+} from "../../utils/storage";
 
 import { icons } from "../../constants/icons";
 
@@ -28,10 +33,22 @@ const MovieInfo = ({ label, value }: CocktailInfoProps) => (
 const Details = () => {
     const { id } = useLocalSearchParams();
 
-    const { data, loading, error } = useFetch(() =>
-        cocktailServices.getDetails(id as string),
-    );
-    const details: Cocktail = data?.drinks[0];
+    const { data, loading, error, refetch } = useFetch(async () => {
+        const [detailsResponse, savedCocktails] = await Promise.all([
+            cocktailServices.getDetails(id as string),
+            getLocalSavedCocktails(),
+        ]);
+
+        const cocktaillId = Number(id);
+        return {
+            detailsResponse,
+            isSaved: savedCocktails.some(
+                (cocktail) => cocktail.cocktail_id === cocktaillId,
+            ),
+        };
+    });
+    const details: Cocktail | undefined = data?.detailsResponse.drinks[0];
+    const isSaved: boolean = data?.isSaved ?? false;
     const ingredients = details ? extractIngredients(details) : [];
 
     if (loading)
@@ -52,10 +69,30 @@ const Details = () => {
     }
 
     const openVideo = () => {
-        if (details.strVideo) {
-            Linking.openURL(details.strVideo);
+        if (details?.strVideo) {
+            Linking.openURL(details?.strVideo);
         }
         return;
+    };
+
+    const onSave = async () => {
+        if (!details) {
+            return;
+        }
+
+        const cocktailId = Number(details.idDrink);
+
+        if (isSaved) {
+            await deleteLocalCocktail(cocktailId);
+        } else {
+            await saveLocalCocktail({
+                cocktail_id: cocktailId,
+                title: details.strDrink,
+                img_url: details.strDrinkThumb ?? "",
+            });
+        }
+
+        await refetch();
     };
 
     return (
@@ -94,6 +131,18 @@ const Details = () => {
                                     />
                                 </TouchableOpacity>
                             )}
+                            <TouchableOpacity
+                                onPress={onSave}
+                                className="absolute bottom-5 left-5 rounded-full size-14 bg-white flex items-center justify-center"
+                            >
+                                <Image
+                                    source={
+                                        isSaved ? icons.saved : icons.unsaved
+                                    }
+                                    className="w-8 h-8"
+                                    resizeMode="stretch"
+                                />
+                            </TouchableOpacity>
                         </View>
 
                         <View className="flex-col items-start justify-center mt-5 px-5">

@@ -68,3 +68,10 @@ interface CocktailInfoProps {
     label: string;
     value?: string | number | null;
 }
+
+interface SavedCocktail {
+    cocktail_id: number;
+    title: string;
+    img_url: string;
+    createdAt: string;
+}

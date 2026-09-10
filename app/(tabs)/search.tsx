@@ -95,8 +95,7 @@ const Search = () => {
                 keyExtractor={(item) => item.idDrink.toString()}
                 numColumns={2}
                 columnWrapperStyle={{
-                    justifyContent: "flex-start",
-                    gap: 16,
+                    justifyContent: "space-between",
                     marginVertical: 16,
                 }}
                 contentContainerStyle={{ paddingBottom: 100 }}

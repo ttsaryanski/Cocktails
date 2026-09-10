@@ -112,9 +112,7 @@ export default function Index() {
                             keyExtractor={(item) => item.idDrink.toString()}
                             numColumns={2}
                             columnWrapperStyle={{
-                                justifyContent: "flex-start",
-                                gap: 20,
-                                paddingRight: 5,
+                                justifyContent: "space-between",
                                 marginBottom: 10,
                             }}
                             className="mt-2 pb-32"
