@@ -2,8 +2,10 @@ import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import {
     ActivityIndicator,
+    Alert,
     FlatList,
     Image,
+    Pressable,
     RefreshControl,
     ScrollView,
     Text,
@@ -12,7 +14,10 @@ import {
 
 import SavedCocktailCard from "../../components/saved-cocktail-card";
 import useFetch from "../../hooks/useFetch";
-import { getLocalSavedCocktails } from "../../utils/storage";
+import {
+    deleteAllLocalCocktails,
+    getLocalSavedCocktails,
+} from "../../utils/storage";
 
 import { icons } from "../../constants/icons";
 
@@ -32,6 +37,22 @@ const Save = () => {
 
     const handleRefresh = async () => {
         await refetch();
+    };
+
+    const handleDeleteAll = async () => {
+        Alert.alert("Clear All", "Clear all saved cocktails?", [
+            {
+                text: "Cancel",
+                style: "cancel",
+            },
+            {
+                text: "Clear",
+                onPress: async () => {
+                    await deleteAllLocalCocktails();
+                    refetch();
+                },
+            },
+        ]);
     };
 
     return (
@@ -65,10 +86,31 @@ const Save = () => {
                 ) : (
                     <View className="flex-1 mt-1">
                         {savedCocktails && savedCocktails.length > 0 ? (
-                            <View className="mt-3">
-                                <Text className="text-lg text-white text-center font-bold mb-3">
-                                    Saved cocktails
-                                </Text>
+                            <View>
+                                <View className="flex flex-row items-center justify-between">
+                                    <Text className="text-lg text-white font-bold">
+                                        Saved cocktails
+                                    </Text>
+
+                                    {savedCocktails &&
+                                        savedCocktails.length > 1 && (
+                                            <Pressable
+                                                onPress={handleDeleteAll}
+                                                className="rounded-full"
+                                                style={{
+                                                    backgroundColor: "#AB8BFF",
+                                                }}
+                                            >
+                                                <Text
+                                                    className=" px-3 py-1"
+                                                    style={{ color: "#221F3D" }}
+                                                >
+                                                    Clear all
+                                                </Text>
+                                            </Pressable>
+                                        )}
+                                </View>
+
                                 <FlatList
                                     data={savedCocktails}
                                     renderItem={({ item }) => (
@@ -82,7 +124,7 @@ const Save = () => {
                                         justifyContent: "space-between",
                                         marginBottom: 10,
                                     }}
-                                    className="mt-2 pb-32"
+                                    className="mt-5 pb-28"
                                     scrollEnabled={false}
                                 />
                             </View>
