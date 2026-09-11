@@ -112,7 +112,9 @@ const Save = () => {
                                 </View>
 
                                 <FlatList
-                                    data={savedCocktails}
+                                    data={savedCocktails.sort((a, b) =>
+                                        a.title.localeCompare(b.title),
+                                    )}
                                     renderItem={({ item }) => (
                                         <SavedCocktailCard cocktail={item} />
                                     )}
