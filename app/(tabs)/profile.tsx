@@ -13,6 +13,8 @@ const Profile = () => {
                     tintColor="#fff"
                 />
                 <Text className="text-gray-500 text-base">Profile</Text>
+
+                <Text className="text-red-500 text-base">In development</Text>
             </View>
         </SafeAreaView>
     );

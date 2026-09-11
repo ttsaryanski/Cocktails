@@ -1,4 +1,5 @@
 import arrow from "@/assets/icons/arrow.png";
+import gear from "@/assets/icons/gear.png";
 import heartEmpty from "@/assets/icons/heart-empty.png";
 import heart from "@/assets/icons/heart.png";
 import home from "@/assets/icons/home.png";
@@ -24,4 +25,5 @@ export const icons = {
     arrow,
     heart,
     heartEmpty,
+    gear,
 };

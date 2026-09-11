@@ -131,7 +131,7 @@ const Search = () => {
                             !error &&
                             query.trim() &&
                             (cocktails?.drinks?.length ?? 0) > 0 && (
-                                <Text className="text-xl text-white font-bold">
+                                <Text className="text-xl text-indigo-200 font-bold">
                                     Search Results for{" "}
                                     <Text className="text-accent">{query}</Text>
                                 </Text>

@@ -21,7 +21,7 @@ const CoocktailCard = ({
                 />
 
                 <Text
-                    className="text-sm font-bold text-white my-2"
+                    className="text-sm font-bold text-indigo-200 my-2"
                     numberOfLines={1}
                 >
                     {strDrink}
@@ -29,13 +29,13 @@ const CoocktailCard = ({
 
                 {strAlcoholic === "Non alcoholic" ? (
                     <View className="self-start bg-green-500 rounded-md p-1">
-                        <Text className="text-xs text-white">
+                        <Text className="text-xs text-indigo-200">
                             {strAlcoholic}
                         </Text>
                     </View>
                 ) : (
                     <View className="self-start bg-red-500 rounded-md p-1">
-                        <Text className="text-xs text-white">
+                        <Text className="text-xs text-indigo-200">
                             {strAlcoholic}
                         </Text>
                     </View>

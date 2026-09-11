@@ -105,7 +105,7 @@ const Details = () => {
                         className="mt-10 self-center"
                     />
                 ) : error ? (
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "indigo-200" }}>
                         Error: {error?.message}
                     </Text>
                 ) : (
@@ -122,7 +122,7 @@ const Details = () => {
                             {details?.strVideo && (
                                 <TouchableOpacity
                                     onPress={openVideo}
-                                    className="absolute bottom-5 right-5 rounded-full size-14 bg-white flex items-center justify-center"
+                                    className="absolute bottom-5 right-5 rounded-full size-14 bg-indigo-200 flex items-center justify-center"
                                 >
                                     <Image
                                         source={icons.play}
@@ -133,7 +133,7 @@ const Details = () => {
                             )}
                             <TouchableOpacity
                                 onPress={onSave}
-                                className="absolute bottom-5 left-5 rounded-full size-14 bg-white flex items-center justify-center"
+                                className="absolute bottom-5 left-5 rounded-full size-14 bg-indigo-200 flex items-center justify-center"
                             >
                                 <Image
                                     source={
@@ -146,7 +146,7 @@ const Details = () => {
                         </View>
 
                         <View className="flex-col items-start justify-center mt-5 px-5">
-                            <Text className="text-white font-bold text-xl">
+                            <Text className="text-indigo-200 font-bold text-xl">
                                 {details?.strDrink}
                             </Text>
 
@@ -157,13 +157,13 @@ const Details = () => {
 
                             {details?.strAlcoholic === "Non alcoholic" ? (
                                 <View className="mt-2 bg-green-500 rounded-md p-1">
-                                    <Text className="text-xs text-white">
+                                    <Text className="text-xs text-indigo-200">
                                         {details?.strAlcoholic}
                                     </Text>
                                 </View>
                             ) : (
                                 <View className="mt-2 bg-red-500 rounded-md p-1">
-                                    <Text className="text-xs text-white">
+                                    <Text className="text-xs text-indigo-200">
                                         {details?.strAlcoholic}
                                     </Text>
                                 </View>

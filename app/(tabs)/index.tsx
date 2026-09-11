@@ -65,7 +65,7 @@ export default function Index() {
                         className="mt-10 self-center"
                     />
                 ) : cocktailsError || trendingError ? (
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "indigo-200" }}>
                         Error:{" "}
                         {cocktailsError?.message || trendingError?.message}
                     </Text>
@@ -73,7 +73,7 @@ export default function Index() {
                     <View className="flex-1 mt-1">
                         {trendingCocktails && (
                             <View className="mt-3">
-                                <Text className="text-lg text-white text-center font-bold mb-3">
+                                <Text className="text-lg text-indigo-200 text-center font-bold mb-3">
                                     Trending cocktails
                                 </Text>
                                 <FlatList
@@ -100,7 +100,7 @@ export default function Index() {
                             </View>
                         )}
 
-                        <Text className="text-lg text-white text-center font-bold mt-5 mb-3">
+                        <Text className="text-lg text-indigo-200 text-center font-bold mt-5 mb-3">
                             Random Cocktails
                         </Text>
 

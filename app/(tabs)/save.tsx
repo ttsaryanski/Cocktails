@@ -80,7 +80,7 @@ const Save = () => {
                         className="mt-10 self-center"
                     />
                 ) : error ? (
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "indigo-200" }}>
                         Error: {error?.message}
                     </Text>
                 ) : (
@@ -88,7 +88,7 @@ const Save = () => {
                         {savedCocktails && savedCocktails.length > 0 ? (
                             <View>
                                 <View className="flex flex-row items-center justify-between">
-                                    <Text className="text-lg text-white font-bold">
+                                    <Text className="text-lg text-indigo-200 font-bold">
                                         Saved cocktails
                                     </Text>
 
