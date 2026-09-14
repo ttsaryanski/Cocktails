@@ -1,7 +1,7 @@
 import { Link } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
-const CoocktailCard = ({
+const CocktailCard = ({
     idDrink,
     strDrinkThumb,
     strDrink,
@@ -21,21 +21,21 @@ const CoocktailCard = ({
                 />
 
                 <Text
-                    className="text-sm font-bold text-indigo-200 my-2"
+                    className="text-sm font-bold text-light-200 my-2"
                     numberOfLines={1}
                 >
                     {strDrink}
                 </Text>
 
                 {strAlcoholic === "Non alcoholic" ? (
-                    <View className="self-start bg-green-500 rounded-md p-1">
-                        <Text className="text-xs text-indigo-200">
+                    <View className="self-start bg-green-800 rounded-md p-1">
+                        <Text className="text-xs text-light-200">
                             {strAlcoholic}
                         </Text>
                     </View>
                 ) : (
-                    <View className="self-start bg-red-500 rounded-md p-1">
-                        <Text className="text-xs text-indigo-200">
+                    <View className="self-start bg-red-800 rounded-md p-1">
+                        <Text className="text-xs text-light-200">
                             {strAlcoholic}
                         </Text>
                     </View>
@@ -45,4 +45,4 @@ const CoocktailCard = ({
     );
 };
 
-export default CoocktailCard;
+export default CocktailCard;

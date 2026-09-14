@@ -80,7 +80,7 @@ const Save = () => {
                         className="mt-10 self-center"
                     />
                 ) : error ? (
-                    <Text style={{ color: "indigo-200" }}>
+                    <Text className="text-light-200">
                         Error: {error?.message}
                     </Text>
                 ) : (
@@ -88,7 +88,7 @@ const Save = () => {
                         {savedCocktails && savedCocktails.length > 0 ? (
                             <View>
                                 <View className="flex flex-row items-center justify-between">
-                                    <Text className="text-lg text-indigo-200 font-bold">
+                                    <Text className="text-lg text-light-200 font-bold">
                                         Saved cocktails
                                     </Text>
 
@@ -96,15 +96,9 @@ const Save = () => {
                                         savedCocktails.length > 1 && (
                                             <Pressable
                                                 onPress={handleDeleteAll}
-                                                className="rounded-full"
-                                                style={{
-                                                    backgroundColor: "#AB8BFF",
-                                                }}
+                                                className="rounded-full bg-accent"
                                             >
-                                                <Text
-                                                    className=" px-3 py-1"
-                                                    style={{ color: "#221F3D" }}
-                                                >
+                                                <Text className=" px-3 py-1 text-dark-100">
                                                     Clear all
                                                 </Text>
                                             </Pressable>
@@ -132,7 +126,7 @@ const Save = () => {
                             </View>
                         ) : (
                             <View className="mt-10 px-5">
-                                <Text className="text-gray-500 text-center mt-10">
+                                <Text className="text-light-300 text-center mt-10">
                                     No saved cocktails.
                                 </Text>
                             </View>

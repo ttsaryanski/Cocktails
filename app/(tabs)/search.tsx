@@ -105,7 +105,7 @@ const Search = () => {
                             <Image source={icons.logo} className="w-12 h-10" />
                         </View>
 
-                        <View className="my-5">
+                        <View className="mt-5 mb-3">
                             <SearchBar
                                 placeholder="Search for a cocktail by name"
                                 value={query}
@@ -122,7 +122,7 @@ const Search = () => {
                         )}
 
                         {error && (
-                            <Text className="text-red-500 px-5 my-3">
+                            <Text className="text-red-800 px-5 my-3">
                                 Error: {error.message}
                             </Text>
                         )}
@@ -131,7 +131,7 @@ const Search = () => {
                             !error &&
                             query.trim() &&
                             (cocktails?.drinks?.length ?? 0) > 0 && (
-                                <Text className="text-xl text-indigo-200 font-bold">
+                                <Text className="text-xl text-light-200 font-bold">
                                     Search Results for{" "}
                                     <Text className="text-accent">{query}</Text>
                                 </Text>
@@ -141,7 +141,7 @@ const Search = () => {
                 ListEmptyComponent={
                     !loading && !error ? (
                         <View className="mt-10 px-5">
-                            <Text className="text-center text-gray-500">
+                            <Text className="text-center text-light-300">
                                 {query.trim()
                                     ? "No cocktail found"
                                     : "Start typing to search for cocktails"}

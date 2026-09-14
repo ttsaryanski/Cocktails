@@ -29,18 +29,15 @@ const SearchBar = ({ onPress, onChangeText, placeholder, value }: Props) => {
                 placeholder={placeholder}
                 value={value}
                 placeholderTextColor="#a8b5db"
-                className="flex-1 ml-2 text-indigo-200"
+                className="flex-1 ml-2 text-light-200"
             />
 
             {!!value && (
                 <Pressable
                     onPress={onClear}
-                    className="mr-2 rounded-full"
-                    style={{ backgroundColor: "#AB8BFF" }}
+                    className="mr-2 rounded-full bg-accent"
                 >
-                    <Text className=" p-3" style={{ color: "#221F3D" }}>
-                        Clear
-                    </Text>
+                    <Text className=" p-3 text-dark-100">Clear</Text>
                 </Pressable>
             )}
         </View>

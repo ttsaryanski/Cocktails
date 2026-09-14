@@ -25,7 +25,7 @@ const Settings = () => {
                     tintColor="#fff"
                 />
 
-                <Text className="text-gray-500 text-center">Settings</Text>
+                <Text className="text-light-300 text-center">Settings</Text>
 
                 <View className="mt-4 mt-auto mb-36 flex-end">
                     <TouchableOpacity
@@ -34,22 +34,22 @@ const Settings = () => {
                                 "https://ttsaryanski.github.io/Cocktails-PrivacyPolicy",
                             )
                         }
-                        className="flex flex-row bg-slate-600 px-2 py-5 rounded-md"
+                        className="flex flex-row bg-dark-100 px-2 py-5 rounded-md"
                     >
                         <MaterialCommunityIcons
                             name="shield-link-variant-outline"
                             size={24}
-                            color="#C6D2FF"
+                            color="#A8B5DB"
                         />
 
-                        <Text className="text-indigo-200 ml-2">
+                        <Text className="text-light-200 ml-2">
                             Privacy Policy
                         </Text>
 
                         <Ionicons
                             name="open-outline"
                             size={20}
-                            color="#C6D2FF"
+                            color="#A8B5DB"
                             className="ml-auto"
                         />
                     </TouchableOpacity>
