@@ -102,6 +102,21 @@ export default function TabsLayout() {
             />
 
             <Tabs.Screen
+                name="explore"
+                options={{
+                    title: "Explore",
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon
+                            focused={focused}
+                            icon={icons.explore}
+                            title="Explore"
+                        />
+                    ),
+                }}
+            />
+
+            <Tabs.Screen
                 name="save"
                 options={{
                     title: "Save",
@@ -111,21 +126,6 @@ export default function TabsLayout() {
                             focused={focused}
                             icon={icons.save}
                             title="Save"
-                        />
-                    ),
-                }}
-            />
-
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    title: "Profile",
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <TabIcon
-                            focused={focused}
-                            icon={icons.person}
-                            title="Profile"
                         />
                     ),
                 }}
