@@ -6,6 +6,7 @@ const endPoints = {
     searchByName: (query: string) =>
         `/search.php?s=${encodeURIComponent(query)}`,
     searchById: (query: string) => `/lookup.php?i=${query}`,
+    filterByType: (type: string) => `/filter.php?a=${type}`,
 };
 
 async function getRandom() {
@@ -24,9 +25,14 @@ async function getDetails(query: string) {
     return api.get<Cocktails>(endPoints.searchById(query));
 }
 
+async function filterByType(type: string) {
+    return api.get<Cocktails>(endPoints.filterByType(type));
+}
+
 export const cocktailServices = {
     getRandom,
     getPopular,
     searchByName,
     getDetails,
+    filterByType,
 };

@@ -17,19 +17,12 @@ const Index = () => {
             />
 
             <ScrollView
-                className="flex-1 px-5"
+                className="flex-1 px-2"
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     minHeight: "100%",
                     paddingBottom: 100,
                 }}
-                // refreshControl={
-                //     <RefreshControl
-                //         refreshing={trendingLoading || cocktailsLoading}
-                //         onRefresh={handleRefresh}
-                //         tintColor="#AB8BFF"
-                //     />
-                // }
             >
                 <Image
                     source={icons.logo}
@@ -41,161 +34,105 @@ const Index = () => {
                         Explore cocktails
                     </Text>
 
-                    <View className="w-full h-52 rounded-xl overflow-hidden mb-10 bg-white">
-                        <Image
-                            source={images.choice}
-                            className="absolute inset-0 w-full h-full"
-                            resizeMode="stretch"
-                            style={{ opacity: 0.75 }}
-                        />
-
-                        <Text
-                            className="font-bold text-4xl text-light-100 text-center uppercase ml-4 my-4 text-shadow-lg"
-                            style={{
-                                textShadowColor: "#030014",
-                                textShadowOffset: { width: 5, height: 5 },
-                                textShadowRadius: 10,
-                            }}
-                        >
+                    <View className="w-full min-h-40 rounded-xl mb-10 py-4 bg-dark-100">
+                        <Text className="font-bold text-3xl text-light-100 text-center uppercase px-4 pb-2">
                             Type of drink
                         </Text>
 
                         <Pressable
+                            className="flex-1"
                             onPress={() => {
                                 router.push("/explore/type");
                             }}
                         >
-                            <View
-                                className="flex flex-row p-4 justify-between items-center"
-                                style={{
-                                    backgroundColor: "rgba(0, 11, 17, 0.5)",
-                                }}
-                            >
-                                <Text className="text-2xl text-light-100 text-center font-bold">
+                            <View className="flex-1 flex-row px-4 justify-between items-center">
+                                <Text className="flex-1 text-2xl text-light-200 text-left font-bold">
                                     Explore by type
                                 </Text>
 
                                 <AntDesign
+                                    style={{ marginLeft: 12 }}
                                     name="caret-right"
                                     size={24}
-                                    color="#D6C7FF"
+                                    color="#A8B5DB"
                                 />
                             </View>
                         </Pressable>
                     </View>
 
-                    <View className="w-full h-52 rounded-xl overflow-hidden mb-10 bg-white">
-                        <Image
-                            source={images.categories}
-                            className="absolute inset-0 w-full h-full"
-                            resizeMode="stretch"
-                            style={{ opacity: 0.75 }}
-                        />
-
-                        <Text
-                            className="font-bold text-4xl text-light-100 text-center uppercase ml-4 my-4 text-shadow-lg"
-                            style={{
-                                textShadowColor: "#030014",
-                                textShadowOffset: { width: 5, height: 5 },
-                                textShadowRadius: 10,
-                            }}
-                        >
+                    <View className="w-full min-h-40 rounded-xl mb-10 bg-dark-100">
+                        <Text className="font-bold text-3xl text-light-100 text-center uppercase px-4 pt-6 pb-2">
                             Category
                         </Text>
 
-                        <Pressable onPress={() => {}}>
-                            <View
-                                className="flex flex-row p-4 justify-between items-center"
-                                style={{
-                                    backgroundColor: "rgba(0, 11, 17, 0.5)",
-                                }}
-                            >
-                                <Text className="text-2xl text-light-100 text-center font-bold">
+                        <Pressable
+                            className="flex-1"
+                            onPress={() => {
+                                router.push("/explore/category");
+                            }}
+                        >
+                            <View className="flex-1 flex-row px-4 pb-4 justify-between items-center">
+                                <Text className="flex-1 text-2xl text-light-200 text-left font-bold">
                                     Explore by category
                                 </Text>
 
                                 <AntDesign
+                                    style={{ marginLeft: 12 }}
                                     name="caret-right"
                                     size={24}
-                                    color="#D6C7FF"
+                                    color="#A8B5DB"
                                 />
                             </View>
                         </Pressable>
                     </View>
 
-                    <View className="w-full h-52 rounded-xl overflow-hidden mb-10 bg-white">
-                        <Image
-                            source={images.ingredients}
-                            className="absolute inset-0 w-full h-full"
-                            resizeMode="stretch"
-                            style={{ opacity: 0.75 }}
-                        />
-
-                        <Text
-                            className="font-bold text-4xl text-light-100 text-center uppercase ml-4 my-4 text-shadow-lg"
-                            style={{
-                                textShadowColor: "#030014",
-                                textShadowOffset: { width: 5, height: 5 },
-                                textShadowRadius: 10,
-                            }}
-                        >
+                    <View className="w-full min-h-40 rounded-xl mb-10 bg-dark-100">
+                        <Text className="font-bold text-3xl text-light-100 text-center uppercase px-4 pt-6 pb-2">
                             Ingredients
                         </Text>
 
-                        <Pressable onPress={() => {}}>
-                            <View
-                                className="flex flex-row p-4 justify-between items-center"
-                                style={{
-                                    backgroundColor: "rgba(0, 11, 17, 0.5)",
-                                }}
-                            >
-                                <Text className="text-2xl text-light-100 text-center font-bold">
+                        <Pressable
+                            className="flex-1"
+                            onPress={() => {
+                                router.push("/explore/ingredient");
+                            }}
+                        >
+                            <View className="flex-1 flex-row px-4 pb-4 justify-between items-center">
+                                <Text className="flex-1 text-2xl text-light-200 text-left font-bold">
                                     Explore by ingredient
                                 </Text>
 
                                 <AntDesign
+                                    style={{ marginLeft: 12 }}
                                     name="caret-right"
                                     size={24}
-                                    color="#D6C7FF"
+                                    color="#A8B5DB"
                                 />
                             </View>
                         </Pressable>
                     </View>
 
-                    <View className="w-full h-52 rounded-xl overflow-hidden mb-10 bg-white">
-                        <Image
-                            source={images.glasses}
-                            className="absolute inset-0 w-full h-full"
-                            resizeMode="stretch"
-                            style={{ opacity: 0.75 }}
-                        />
-
-                        <Text
-                            className="font-bold text-4xl text-light-100 text-center uppercase ml-4 my-4 text-shadow-lg"
-                            style={{
-                                textShadowColor: "#030014",
-                                textShadowOffset: { width: 5, height: 5 },
-                                textShadowRadius: 10,
-                            }}
-                        >
+                    <View className="w-full min-h-40 rounded-xl mb-10 bg-dark-100">
+                        <Text className="font-bold text-3xl text-light-100 text-center uppercase px-4 pt-6 pb-2">
                             Glass
                         </Text>
 
-                        <Pressable onPress={() => {}}>
-                            <View
-                                className="flex flex-row p-4 justify-between items-center"
-                                style={{
-                                    backgroundColor: "rgba(0, 11, 17, 0.5)",
-                                }}
-                            >
-                                <Text className="text-2xl text-light-100 text-center font-bold">
+                        <Pressable
+                            className="flex-1"
+                            onPress={() => {
+                                router.push("/explore/glass");
+                            }}
+                        >
+                            <View className="flex-1 flex-row px-4 pb-4 justify-between items-center">
+                                <Text className="flex-1 text-2xl text-light-200 text-left font-bold">
                                     Explore by glass
                                 </Text>
 
                                 <AntDesign
+                                    style={{ marginLeft: 12 }}
                                     name="caret-right"
                                     size={24}
-                                    color="#D6C7FF"
+                                    color="#A8B5DB"
                                 />
                             </View>
                         </Pressable>

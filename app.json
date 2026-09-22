@@ -2,7 +2,7 @@
     "expo": {
         "name": "Cocktails",
         "slug": "Cocktails",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "orientation": "portrait",
         "icon": "./assets/images/cocktail.png",
         "scheme": "cocktails",
@@ -13,10 +13,9 @@
         "android": {
             "package": "com.ttsaryanski.cocktails",
             "adaptiveIcon": {
-                "backgroundColor": "#6bb3ff",
-                "foregroundImage": "./assets/images/cocktail_foreground.png",
-                "backgroundImage": "./assets/images/cocktail_round.png",
-                "monochromeImage": "./assets/images/cocktail.png"
+                "backgroundColor": "#208AEF",
+                "foregroundImage": "./assets/images/adaptive-icon-foreground.png",
+                "monochromeImage": "./assets/images/monochrome-icon.png"
             },
             "predictiveBackGestureEnabled": false
         },
@@ -34,7 +33,8 @@
                     "imageWidth": 76
                 }
             ],
-            "expo-image"
+            "expo-image",
+            "expo-web-browser"
         ],
         "experiments": {
             "typedRoutes": true,
