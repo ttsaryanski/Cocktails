@@ -1,5 +1,5 @@
 import { useFocusEffect } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import {
     Alert,
     FlatList,
@@ -18,10 +18,14 @@ import {
 
 import SavedCocktailCard from "../../components/saved-cocktail-card";
 
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
 
 const Save = () => {
+    const listRef = useRef<FlatList>(null);
+
     const {
         data: savedCocktails,
         loading,
@@ -60,6 +64,7 @@ const Save = () => {
             <Image source={images.bg} className="absolute w-full z-0" />
 
             <FlatList
+                ref={listRef}
                 data={
                     savedCocktails?.sort((a, b) =>
                         a.title.localeCompare(b.title),
@@ -123,6 +128,19 @@ const Save = () => {
                     </>
                 }
             />
+
+            <Pressable
+                onPress={() =>
+                    listRef.current?.scrollToOffset({
+                        offset: 0,
+                        animated: true,
+                    })
+                }
+                className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                style={{ elevation: 5 }}
+            >
+                <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
+            </Pressable>
         </View>
     );
 };

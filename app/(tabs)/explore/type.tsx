@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
     FlatList,
@@ -22,6 +22,7 @@ import { images } from "../../../constants/images";
 
 const ExploreByType = () => {
     const router = useRouter();
+    const listRef = useRef<FlatList>(null);
 
     const [selectedType, setSelectedType] = useState<string>("Alcoholic");
 
@@ -52,6 +53,7 @@ const ExploreByType = () => {
             />
 
             <FlatList
+                ref={listRef}
                 data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => (
                     <SavedCocktailCard
@@ -166,6 +168,19 @@ const ExploreByType = () => {
                     </>
                 }
             />
+
+            <Pressable
+                onPress={() =>
+                    listRef.current?.scrollToOffset({
+                        offset: 0,
+                        animated: true,
+                    })
+                }
+                className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                style={{ elevation: 5 }}
+            >
+                <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
+            </Pressable>
         </View>
     );
 };

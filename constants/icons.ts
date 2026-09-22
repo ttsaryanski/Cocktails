@@ -1,5 +1,7 @@
 import arrow from "@/assets/icons/arrow.png";
+import catalog from "@/assets/icons/catalog.png";
 import explore from "@/assets/icons/explore.png";
+import explore2 from "@/assets/icons/explore2.png";
 import gear from "@/assets/icons/gear.png";
 import heartEmpty from "@/assets/icons/heart-empty.png";
 import heart from "@/assets/icons/heart.png";
@@ -17,6 +19,7 @@ export const icons = {
     search,
     person,
     explore,
+    explore2,
     logo,
     save,
     saved,
@@ -26,4 +29,5 @@ export const icons = {
     heart,
     heartEmpty,
     gear,
+    catalog,
 };

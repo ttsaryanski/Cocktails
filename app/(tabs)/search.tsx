@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import {
+    ActivityIndicator,
+    FlatList,
+    Image,
+    Pressable,
+    Text,
+    View,
+} from "react-native";
 
 import useFetch from "../../hooks/useFetch";
 import { cocktailServices } from "../../services/cocktailServices";
@@ -8,10 +15,14 @@ import { updateSearchCount } from "../../utils/appwrite";
 import CocktailCard from "../../components/cocktail-card";
 import SearchBar from "../../components/search-bar";
 
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 import { icons } from "../../constants/icons";
 import { images } from "../../constants/images";
 
 const Search = () => {
+    const listRef = useRef<FlatList>(null);
+
     const [query, setQuery] = useState("");
     const [searchResults, setSearchResults] = useState<Cocktails | null>(null);
     const [searchLoading, setSearchLoading] = useState(false);
@@ -89,6 +100,7 @@ const Search = () => {
             />
 
             <FlatList
+                ref={listRef}
                 data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => <CocktailCard {...item} />}
                 keyExtractor={(item) => item.idDrink.toString()}
@@ -153,6 +165,19 @@ const Search = () => {
                     ) : null
                 }
             />
+
+            <Pressable
+                onPress={() =>
+                    listRef.current?.scrollToOffset({
+                        offset: 0,
+                        animated: true,
+                    })
+                }
+                className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                style={{ elevation: 5 }}
+            >
+                <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
+            </Pressable>
         </View>
     );
 };

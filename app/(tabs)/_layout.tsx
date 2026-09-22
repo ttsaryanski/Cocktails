@@ -18,8 +18,16 @@ type TabIconProps = {
     title: string;
     isFirst?: boolean;
     isLast?: boolean;
+    size?: number;
 };
-function TabIcon({ focused, icon, title, isFirst, isLast }: TabIconProps) {
+function TabIcon({
+    focused,
+    icon,
+    title,
+    isFirst,
+    isLast,
+    size,
+}: TabIconProps) {
     const { width } = useWindowDimensions();
     const compactTabs = width < 350 || PixelRatio.getFontScale() > 1.2;
 
@@ -36,7 +44,11 @@ function TabIcon({ focused, icon, title, isFirst, isLast }: TabIconProps) {
                           : {}
                 }
             >
-                <Image source={icon} tintColor="#151312" className="size-5" />
+                <Image
+                    source={icon}
+                    tintColor="#151312"
+                    className={`${size ? `size-${size}` : "size-5"}`}
+                />
                 {!compactTabs && (
                     <Text
                         className="text-secondary text-base font-semibold ml-2"
@@ -52,7 +64,11 @@ function TabIcon({ focused, icon, title, isFirst, isLast }: TabIconProps) {
 
     return (
         <View className="size-full justify-center items-center mt-4 rounded-full">
-            <Image source={icon} tintColor="#A8B5DB" className="size-5" />
+            <Image
+                source={icon}
+                tintColor="#A8B5DB"
+                className={`${size ? `size-${size}` : "size-5"}`}
+            />
         </View>
     );
 }
@@ -120,8 +136,9 @@ export default function TabsLayout() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon={icons.explore}
+                            icon={icons.explore2}
                             title="Explore"
+                            size={6}
                         />
                     ),
                 }}
