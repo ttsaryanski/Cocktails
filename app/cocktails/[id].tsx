@@ -19,12 +19,13 @@ import {
     saveLocalCocktail,
 } from "../../utils/storage";
 
+import { useEffect, useState } from "react";
 import { icons } from "../../constants/icons";
 
-const MovieInfo = ({ label, value }: CocktailInfoProps) => (
+const CocktailInfo = ({ label, value }: CocktailInfoProps) => (
     <View className="flex-col items-start justify-center mt-5">
         <Text className="text-light-200 font-normal text-sm">{label}</Text>
-        <Text className="text-light-100 font-bold text-sm mt-2">
+        <Text className="text-light-200 font-bold text-sm mt-2">
             {value || "N/A"}
         </Text>
     </View>
@@ -32,6 +33,7 @@ const MovieInfo = ({ label, value }: CocktailInfoProps) => (
 
 const Details = () => {
     const { id } = useLocalSearchParams();
+    const [isSaved, setIsSaved] = useState(false);
 
     const { data, loading, error, refetch } = useFetch(async () => {
         const [detailsResponse, savedCocktails] = await Promise.all([
@@ -47,11 +49,17 @@ const Details = () => {
             ),
         };
     });
+
+    useEffect(() => {
+        if (data) {
+            setIsSaved(data.isSaved);
+        }
+    }, [data]);
+
     const details: Cocktail | undefined = data?.detailsResponse.drinks[0];
-    const isSaved: boolean = data?.isSaved ?? false;
     const ingredients = details ? extractIngredients(details) : [];
 
-    if (loading)
+    if (loading && !data)
         return (
             <SafeAreaView className="bg-primary flex-1">
                 <ActivityIndicator />
@@ -84,15 +92,15 @@ const Details = () => {
 
         if (isSaved) {
             await deleteLocalCocktail(cocktailId);
+            setIsSaved(false);
         } else {
             await saveLocalCocktail({
                 cocktail_id: cocktailId,
                 title: details.strDrink,
                 img_url: details.strDrinkThumb ?? "",
             });
+            setIsSaved(true);
         }
-
-        await refetch();
     };
 
     return (
@@ -104,8 +112,8 @@ const Details = () => {
                         color="#0000ff"
                         className="mt-10 self-center"
                     />
-                ) : error ? (
-                    <Text style={{ color: "indigo-200" }}>
+                ) : error && !data ? (
+                    <Text className="text-red-800 text-center mt-10">
                         Error: {error?.message}
                     </Text>
                 ) : (
@@ -150,7 +158,7 @@ const Details = () => {
                                 {details?.strDrink}
                             </Text>
 
-                            <MovieInfo
+                            <CocktailInfo
                                 label="Category"
                                 value={details?.strCategory}
                             />
@@ -169,7 +177,7 @@ const Details = () => {
                                 </View>
                             )}
 
-                            <MovieInfo
+                            <CocktailInfo
                                 label="Glass"
                                 value={details?.strGlass}
                             />
@@ -188,13 +196,13 @@ const Details = () => {
                                             {ingredient.measure} -
                                         </Text>
                                     )}
-                                    <Text className="text-light-100 font-bold text-sm">
+                                    <Text className="text-light-200 font-bold text-sm">
                                         {ingredient.name}
                                     </Text>
                                 </View>
                             ))}
 
-                            <MovieInfo
+                            <CocktailInfo
                                 label="Overview"
                                 value={details?.strInstructions}
                             />

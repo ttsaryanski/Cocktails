@@ -3,7 +3,9 @@ import {
     Image,
     ImageBackground,
     ImageSourcePropType,
+    PixelRatio,
     Text,
+    useWindowDimensions,
     View,
 } from "react-native";
 
@@ -18,23 +20,32 @@ type TabIconProps = {
     isLast?: boolean;
 };
 function TabIcon({ focused, icon, title, isFirst, isLast }: TabIconProps) {
+    const { width } = useWindowDimensions();
+    const compactTabs = width < 350 || PixelRatio.getFontScale() > 1.2;
+
     if (focused) {
         return (
             <ImageBackground
                 source={images.highlight}
-                className="flex flex-row w-full flex-1 min-w-[120px] min-h-14 my-auto justify-center items-center rounded-full overflow-hidden "
+                className={`flex-row w-full flex-1 ${!compactTabs ? "min-w-[120px]" : ""}  min-h-14 my-auto justify-center items-center rounded-full overflow-hidden`}
                 style={
-                    isLast
+                    !compactTabs && isLast
                         ? { justifyContent: "flex-start", paddingLeft: 5 }
-                        : isFirst
+                        : !compactTabs && isFirst
                           ? { paddingLeft: 20 }
                           : {}
                 }
             >
                 <Image source={icon} tintColor="#151312" className="size-5" />
-                <Text className="text-secondary text-base font-semibold ml-2">
-                    {title}
-                </Text>
+                {!compactTabs && (
+                    <Text
+                        className="text-secondary text-base font-semibold ml-2"
+                        numberOfLines={1}
+                        maxFontSizeMultiplier={1.3}
+                    >
+                        {title}
+                    </Text>
+                )}
             </ImageBackground>
         );
     }
@@ -58,7 +69,7 @@ export default function TabsLayout() {
                     alignItems: "center",
                 },
                 tabBarStyle: {
-                    backgroundColor: "#0F0D23",
+                    backgroundColor: "#221F3D",
                     borderRadius: 50,
                     marginHorizontal: 5,
                     marginBottom: 50,
@@ -66,7 +77,7 @@ export default function TabsLayout() {
                     position: "absolute",
                     overflow: "hidden",
                     borderWidth: 1,
-                    borderColor: "#0F0D23",
+                    borderColor: "#221F3D",
                 },
             }}
         >

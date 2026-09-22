@@ -89,7 +89,6 @@ const Search = () => {
             />
 
             <FlatList
-                className="px-5"
                 data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => <CocktailCard {...item} />}
                 keyExtractor={(item) => item.idDrink.toString()}
@@ -98,12 +97,16 @@ const Search = () => {
                     justifyContent: "space-between",
                     marginVertical: 16,
                 }}
-                contentContainerStyle={{ paddingBottom: 100 }}
+                contentContainerStyle={{
+                    paddingHorizontal: 5,
+                    paddingBottom: 100,
+                }}
                 ListHeaderComponent={
                     <>
-                        <View className="w-full flex-row justify-center mt-10 items-center">
-                            <Image source={icons.logo} className="w-12 h-10" />
-                        </View>
+                        <Image
+                            source={icons.logo}
+                            className="w-16 h-16 mt-10 mb-1 mx-auto"
+                        />
 
                         <View className="mt-5 mb-3">
                             <SearchBar
@@ -122,7 +125,7 @@ const Search = () => {
                         )}
 
                         {error && (
-                            <Text className="text-red-800 px-5 my-3">
+                            <Text className="text-red-800 text-center mt-10">
                                 Error: {error.message}
                             </Text>
                         )}
@@ -141,7 +144,7 @@ const Search = () => {
                 ListEmptyComponent={
                     !loading && !error ? (
                         <View className="mt-10 px-5">
-                            <Text className="text-center text-light-300">
+                            <Text className="text-center text-light-200">
                                 {query.trim()
                                     ? "No cocktail found"
                                     : "Start typing to search for cocktails"}
