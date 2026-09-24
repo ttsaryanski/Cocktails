@@ -23,7 +23,7 @@ export default function Index() {
         loading: cocktailsLoading,
         error: cocktailsError,
         refetch: cocktailsRefetch,
-    } = useFetch(() => cocktailServices.getRandom());
+    } = useFetch(() => cocktailServices.getLatest());
 
     const handleRefresh = async () => {
         await Promise.all([trendingRefetch(), cocktailsRefetch()]);
@@ -109,7 +109,7 @@ export default function Index() {
                         )}
 
                         <Text className="text-lg text-light-200 text-center font-bold mt-5 mb-3">
-                            Random Cocktails
+                            Latest Cocktails
                         </Text>
 
                         {cocktailsError && (

@@ -28,6 +28,8 @@ const Search = () => {
     const [searchLoading, setSearchLoading] = useState(false);
     const [searchError, setSearchError] = useState<Error | null>(null);
 
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
+
     let {
         data: popularCocktails,
         loading: popularLoading,
@@ -91,6 +93,12 @@ const Search = () => {
     const loading = query.trim() ? searchLoading : popularLoading;
     const error = query.trim() ? searchError : popularError;
 
+    const handleScroll = (event: any) => {
+        const offsetY = event.nativeEvent.contentOffset.y;
+
+        setShowScrollToTop(offsetY > 400);
+    };
+
     return (
         <View className="flex-1 bg-primary">
             <Image
@@ -101,6 +109,8 @@ const Search = () => {
 
             <FlatList
                 ref={listRef}
+                onScroll={handleScroll}
+                scrollEventThrottle={16}
                 data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => <CocktailCard {...item} />}
                 keyExtractor={(item) => item.idDrink.toString()}
@@ -166,18 +176,20 @@ const Search = () => {
                 }
             />
 
-            <Pressable
-                onPress={() =>
-                    listRef.current?.scrollToOffset({
-                        offset: 0,
-                        animated: true,
-                    })
-                }
-                className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
-                style={{ elevation: 5 }}
-            >
-                <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
-            </Pressable>
+            {showScrollToTop && (
+                <Pressable
+                    onPress={() =>
+                        listRef.current?.scrollToOffset({
+                            offset: 0,
+                            animated: true,
+                        })
+                    }
+                    className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                    style={{ elevation: 5 }}
+                >
+                    <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
+                </Pressable>
+            )}
         </View>
     );
 };

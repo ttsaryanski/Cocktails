@@ -75,3 +75,19 @@ interface SavedCocktail {
     img_url: string;
     createdAt: string;
 }
+
+interface Option {
+    value: string;
+}
+
+interface Options {
+    drinks: Option[];
+}
+
+interface RawOption {
+    [key: string]: string;
+}
+
+interface RawOptions {
+    drinks: RawOption[];
+}

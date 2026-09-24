@@ -136,7 +136,7 @@ export default function TabsLayout() {
                     tabBarIcon: ({ focused }) => (
                         <TabIcon
                             focused={focused}
-                            icon={icons.explore2}
+                            icon={icons.catalog}
                             title="Explore"
                             size={6}
                         />

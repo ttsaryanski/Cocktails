@@ -15,8 +15,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import useFetch from "../../../hooks/useFetch";
 import { cocktailServices } from "../../../services/cocktailServices";
 
+import CategoryCard from "../../../components/option-card";
 import SavedCocktailCard from "../../../components/saved-cocktail-card";
 
+import { types } from "../../../constants/alcoholic-types";
 import { icons } from "../../../constants/icons";
 import { images } from "../../../constants/images";
 
@@ -25,13 +27,21 @@ const ExploreByType = () => {
     const listRef = useRef<FlatList>(null);
 
     const [selectedType, setSelectedType] = useState<string>("Alcoholic");
+    const [showScrollToTop, setShowScrollToTop] = useState(false);
 
-    const usedClass =
-        selectedType === "Alcoholic"
-            ? 1
+    const handleScroll = (event: any) => {
+        const offsetY = event.nativeEvent.contentOffset.y;
+
+        setShowScrollToTop(offsetY > 400);
+    };
+
+    const usedTitle = (selectedType: string) => {
+        return selectedType === "Alcoholic"
+            ? "Alcoholic"
             : selectedType === "Non_Alcoholic"
-              ? 2
-              : 3;
+              ? "Non alcoholic"
+              : "Optional alcohol";
+    };
 
     const {
         data: cocktails,
@@ -54,6 +64,7 @@ const ExploreByType = () => {
 
             <FlatList
                 ref={listRef}
+                onScroll={handleScroll}
                 data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => (
                     <SavedCocktailCard
@@ -105,52 +116,34 @@ const ExploreByType = () => {
                             />
                         </View>
 
-                        <View className="flex-row flex-wrap gap-2 justify-around my-5">
-                            <Pressable
-                                onPress={() => {
-                                    setSelectedType("Alcoholic");
+                        <View className="mt-3">
+                            <FlatList
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                className="my-3"
+                                data={types ?? []}
+                                contentContainerStyle={{
+                                    paddingRight: 3,
                                 }}
-                                className={`p-3 rounded-lg ${
-                                    usedClass === 1
-                                        ? "bg-red-100"
-                                        : "bg-red-400"
-                                }`}
-                            >
-                                <Text className="text-dark-100 text-sm font-bold">
-                                    Alcoholic
-                                </Text>
-                            </Pressable>
-
-                            <Pressable
-                                onPress={() => {
-                                    setSelectedType("Non_Alcoholic");
-                                }}
-                                className={`p-3 rounded-lg ${
-                                    usedClass === 2
-                                        ? "bg-green-100"
-                                        : "bg-green-400"
-                                }`}
-                            >
-                                <Text className="text-dark-100 text-sm font-bold">
-                                    Non alcoholic
-                                </Text>
-                            </Pressable>
-
-                            <Pressable
-                                onPress={() => {
-                                    setSelectedType("Optional_Alcohol");
-                                }}
-                                className={`p-3 rounded-lg ${
-                                    usedClass === 3
-                                        ? "bg-red-100"
-                                        : "bg-red-400"
-                                }`}
-                            >
-                                <Text className="text-dark-100 text-sm font-bold">
-                                    Optional alcohol
-                                </Text>
-                            </Pressable>
+                                renderItem={({ item }) => (
+                                    <CategoryCard
+                                        onPress={() =>
+                                            setSelectedType(item.value)
+                                        }
+                                        focused={selectedType === item.value}
+                                        label={item.label}
+                                    />
+                                )}
+                                keyExtractor={(item) => item.id.toString()}
+                                ItemSeparatorComponent={() => (
+                                    <View className="w-3" />
+                                )}
+                            />
                         </View>
+
+                        <Text className="text-lg text-center text-light-200 font-bold mb-5">
+                            {usedTitle(selectedType)} cocktails
+                        </Text>
 
                         {error && (
                             <Text className="text-red-800 text-center mt-10">
@@ -169,18 +162,20 @@ const ExploreByType = () => {
                 }
             />
 
-            <Pressable
-                onPress={() =>
-                    listRef.current?.scrollToOffset({
-                        offset: 0,
-                        animated: true,
-                    })
-                }
-                className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
-                style={{ elevation: 5 }}
-            >
-                <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
-            </Pressable>
+            {showScrollToTop && (
+                <Pressable
+                    onPress={() =>
+                        listRef.current?.scrollToOffset({
+                            offset: 0,
+                            animated: true,
+                        })
+                    }
+                    className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                    style={{ elevation: 5 }}
+                >
+                    <Ionicons name="arrow-up" size={26} color="#A8B5DB" />
+                </Pressable>
+            )}
         </View>
     );
 };
