@@ -154,7 +154,7 @@ const Details = () => {
                         </View>
 
                         <View className="flex-col items-start justify-center mt-5 px-5">
-                            <Text className="text-indigo-200 font-bold text-xl">
+                            <Text className="text-light-200 font-bold text-xl">
                                 {details?.strDrink}
                             </Text>
 
@@ -164,14 +164,14 @@ const Details = () => {
                             />
 
                             {details?.strAlcoholic === "Non alcoholic" ? (
-                                <View className="mt-2 bg-green-500 rounded-md p-1">
-                                    <Text className="text-xs text-indigo-200">
+                                <View className="mt-2 bg-green-800 rounded-md px-2 py-1">
+                                    <Text className="text-xs text-light-200">
                                         {details?.strAlcoholic}
                                     </Text>
                                 </View>
                             ) : (
-                                <View className="mt-2 bg-red-500 rounded-md p-1">
-                                    <Text className="text-xs text-indigo-200">
+                                <View className="mt-2 bg-red-800 rounded-md px-2 py-1">
+                                    <Text className="text-xs text-light-200">
                                         {details?.strAlcoholic}
                                     </Text>
                                 </View>

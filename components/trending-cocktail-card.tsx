@@ -21,10 +21,13 @@ const TrendingCocktailCard = ({
                     resizeMode="cover"
                 />
 
-                <View className="absolute bottom-14 -left-3.5 px-2 py-1 rounded-full">
+                <View className="absolute bottom-14 -left-3.5 px-3 py-1 rounded-full">
                     <MaskedView
                         maskElement={
-                            <Text className="font-bold text-light-200 text-6xl">
+                            <Text
+                                className="font-bold text-light-200 text-6xl"
+                                allowFontScaling={false}
+                            >
                                 {index + 1}
                             </Text>
                         }

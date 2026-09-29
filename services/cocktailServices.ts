@@ -6,41 +6,86 @@ const endPoints = {
     popular: "/popular.php",
     searchByName: (query: string) =>
         `/search.php?s=${encodeURIComponent(query)}`,
+    searchIngredient: (name: string) => `/search.php?i=${name}`,
     detailsById: (query: string) => `/lookup.php?i=${query}`,
     filterByType: (type: string) => `/filter.php?a=${type}`,
-    filterByCategory: (type: string) => `/filter.php?c=${type}`,
+    filterByCategory: (category: string) => `/filter.php?c=${category}`,
+    filterByIngredient: (ingredient: string) => `/filter.php?i=${ingredient}`,
     listOption: (option: string) => `/list.php?${option}=list`,
 };
 
 async function getRandom() {
-    return api.get<Cocktails>(endPoints.random);
+    const response = await api.get<Cocktails>(endPoints.random);
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
 async function getLatest() {
-    return api.get<Cocktails>(endPoints.latest);
+    const response = await api.get<Cocktails>(endPoints.latest);
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
 async function getPopular() {
-    return api.get<Cocktails>(endPoints.popular);
+    const response = await api.get<Cocktails>(endPoints.popular);
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
 async function searchByName(query: string) {
-    return api.get<Cocktails>(endPoints.searchByName(query));
+    const response = await api.get<Cocktails>(endPoints.searchByName(query));
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
+}
+
+async function getIngredientByName(name: string) {
+    const response = await api.get<Ingredients>(
+        endPoints.searchIngredient(name),
+    );
+    const ingredients = Array.isArray(response.ingredients)
+        ? response.ingredients
+        : [];
+
+    return { ingredients };
 }
 
 async function getDetails(query: string) {
-    return api.get<Cocktail>(endPoints.detailsById(query));
+    const response = await api.get<Cocktails>(endPoints.detailsById(query));
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
 async function filterByType(type: string) {
-    return api.get<Cocktails>(endPoints.filterByType(type));
+    const response = await api.get<Cocktails>(endPoints.filterByType(type));
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
-async function filterByCategory(type: string) {
-    return api.get<Cocktails>(endPoints.filterByCategory(type));
+async function filterByCategory(category: string) {
+    const response = await api.get<Cocktails>(
+        endPoints.filterByCategory(category),
+    );
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
 }
 
-async function getOption(option: string) {
+async function filterByIngredient(ingredient: string) {
+    const response = await api.get<Cocktails>(
+        endPoints.filterByIngredient(ingredient),
+    );
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
+}
+
+async function getOptions(option: string) {
     const config = optionConfig[option as OptionType];
 
     const res = await api.get<RawOptions>(endPoints.listOption(config.query));
@@ -55,10 +100,12 @@ export const cocktailServices = {
     getLatest,
     getPopular,
     searchByName,
+    getIngredientByName,
     getDetails,
     filterByType,
     filterByCategory,
-    getOption,
+    filterByIngredient,
+    getOptions,
 };
 
 type OptionType = "a" | "c" | "g" | "i";

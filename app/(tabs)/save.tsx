@@ -99,27 +99,27 @@ const Save = () => {
                 }
                 ListHeaderComponent={
                     <>
-                        <Image
-                            source={icons.logo}
-                            className="w-16 h-16 mt-10 mb-1 mx-auto"
-                        />
-
-                        <View className="flex flex-row flex-wrap gap-2 items-center justify-around my-5">
-                            <Text className="text-lg text-light-200 font-bold">
-                                Saved cocktails
-                            </Text>
+                        <View className="relative flex-row items-center justify-center">
+                            <Image
+                                source={icons.logo}
+                                className="w-16 h-16 mt-10 mb-1 mx-auto"
+                            />
 
                             {savedCocktails && savedCocktails.length > 1 && (
                                 <Pressable
                                     onPress={handleDeleteAll}
-                                    className="rounded-full bg-accent"
+                                    className="absolute right-2 mt-10 rounded-full bg-accent"
                                 >
-                                    <Text className=" px-3 py-1 text-dark-100">
+                                    <Text className=" px-5 py-2 text-dark-100">
                                         Clear all
                                     </Text>
                                 </Pressable>
                             )}
                         </View>
+
+                        <Text className="text-lg text-light-200 text-center font-bold mt-5 mb-3">
+                            Saved cocktails
+                        </Text>
 
                         {savedCocktails?.length === 0 && (
                             <View className="mt-10 px-5">

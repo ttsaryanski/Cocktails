@@ -1,7 +1,6 @@
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
-    ActivityIndicator,
     FlatList,
     Image,
     Pressable,
@@ -10,46 +9,33 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../../hooks/useFetch";
-import { cocktailServices } from "../../../services/cocktailServices";
+import useFetch from "../../hooks/useFetch";
+import { cocktailServices } from "../../services/cocktailServices";
 
-import CategoryCard from "../../../components/option-card";
-import SavedCocktailCard from "../../../components/saved-cocktail-card";
+import SavedCocktailCard from "../../components/saved-cocktail-card";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { icons } from "../../constants/icons";
+import { images } from "../../constants/images";
 
-const Category = () => {
+const Ingredient = () => {
+    const { ingredient } = useLocalSearchParams<{ ingredient: string }>();
     const router = useRouter();
     const listRef = useRef<FlatList>(null);
 
-    const [selectedCategory, setSelectedCategory] =
-        useState<string>("Cocktail");
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-    const {
-        data: options,
-        loading,
-        error,
-        refetch,
-    } = useFetch(() => cocktailServices.getOptions("c"), false);
 
     const {
         data: cocktails,
         loading: cocktailsLoading,
         error: cocktailsError,
         refetch: cocktailsRefetch,
-    } = useFetch(
-        () => cocktailServices.filterByCategory(selectedCategory),
-        false,
-    );
+    } = useFetch(() => cocktailServices.filterByIngredient(ingredient), false);
 
     useEffect(() => {
-        refetch();
         cocktailsRefetch();
-    }, [selectedCategory, refetch, cocktailsRefetch]);
+    }, [ingredient, cocktailsRefetch]);
 
     const handleScroll = (event: any) => {
         const offsetY = event.nativeEvent.contentOffset.y;
@@ -92,9 +78,8 @@ const Category = () => {
                 }}
                 refreshControl={
                     <RefreshControl
-                        refreshing={loading || cocktailsLoading}
+                        refreshing={cocktailsLoading}
                         onRefresh={() => {
-                            refetch();
                             cocktailsRefetch();
                         }}
                         tintColor="#AB8BFF"
@@ -122,60 +107,12 @@ const Category = () => {
                             />
                         </View>
 
-                        {loading && !options && (
-                            <View className="mt-3 items-center">
-                                <ActivityIndicator
-                                    size="small"
-                                    color="#AB8BFF"
-                                />
-                            </View>
-                        )}
-
-                        {options && (
-                            <View className="mt-3">
-                                <FlatList
-                                    horizontal
-                                    showsHorizontalScrollIndicator={false}
-                                    className="my-3"
-                                    data={options ?? []}
-                                    contentContainerStyle={{
-                                        paddingRight: 5,
-                                    }}
-                                    renderItem={({ item }) => (
-                                        <CategoryCard
-                                            category={item.value}
-                                            onPress={() =>
-                                                setSelectedCategory(item.value)
-                                            }
-                                            focused={
-                                                selectedCategory === item.value
-                                            }
-                                        />
-                                    )}
-                                    keyExtractor={(item) =>
-                                        `${item.value}${randomNumber}`
-                                    }
-                                    ItemSeparatorComponent={() => (
-                                        <View className="w-3" />
-                                    )}
-                                />
-                            </View>
-                        )}
-
-                        {error && (
-                            <View className="mt-3">
-                                <Text className="text-lg text-light-200 text-center font-bold mb-3">
-                                    Category list failed to load
-                                </Text>
-
-                                <Text className="text-red-800 text-center">
-                                    Error: {error?.message}
-                                </Text>
-                            </View>
-                        )}
-
                         <Text className="text-lg text-light-200 text-center font-bold mt-5 mb-3">
-                            Category: {selectedCategory}
+                            Ingredient{" "}
+                            <Text className="text-2xl text-light-100">
+                                {" "}
+                                {ingredient}{" "}
+                            </Text>
                         </Text>
 
                         {cocktailsError && (
@@ -188,7 +125,7 @@ const Category = () => {
                             !cocktailsError &&
                             cocktails?.drinks.length === 0 && (
                                 <Text className="text-light-200 text-center mt-10">
-                                    No type-specific cocktails.
+                                    No ingredient-specific cocktails.
                                 </Text>
                             )}
                     </>
@@ -213,6 +150,4 @@ const Category = () => {
     );
 };
 
-export default Category;
-
-export const randomNumber = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
+export default Ingredient;
