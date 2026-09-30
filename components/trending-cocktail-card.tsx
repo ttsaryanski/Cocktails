@@ -16,7 +16,11 @@ const TrendingCocktailCard = ({
         <Link href={`/cocktails/${cocktail_id}`} asChild>
             <TouchableOpacity className="w-32 relative pl-5">
                 <Image
-                    source={{ uri: img_url }}
+                    source={{
+                        uri: img_url
+                            ? img_url
+                            : "https://placehold.co/400x400/0F0D23/A8B5DB.png",
+                    }}
                     className="w-32 h-48 rounded-lg"
                     resizeMode="cover"
                 />

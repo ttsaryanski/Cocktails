@@ -18,6 +18,10 @@ export default function RootLayout() {
                     name="ingredients/[ingredient]"
                     options={{ headerShown: false }}
                 />
+                <Stack.Screen
+                    name="glasses/[glass]"
+                    options={{ headerShown: false }}
+                />
             </Stack>
         </>
     );

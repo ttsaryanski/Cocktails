@@ -14,7 +14,7 @@ const CocktailCard = ({
                     source={{
                         uri: strDrinkThumb
                             ? strDrinkThumb
-                            : "https://placehold.co/600x400/1a1a1a/FFFFFF.png",
+                            : "https://placehold.co/500x400/0F0D23/A8B5DB.png",
                     }}
                     className="w-full h-52 rounded-lg"
                     resizeMode="cover"

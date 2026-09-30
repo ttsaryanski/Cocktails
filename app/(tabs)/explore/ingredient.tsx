@@ -17,7 +17,7 @@ import { randomNumber } from "./category";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import Footer from "../../../components/ingredients-footer";
+import IngredientFooter from "../../../components/ingredients-footer";
 
 import { icons } from "../../../constants/icons";
 import { images } from "../../../constants/images";
@@ -160,7 +160,9 @@ const Ingredient = () => {
                         />
                     </>
                 }
-                ListFooterComponent={<Footer ingredient={selectedIngredient} />}
+                ListFooterComponent={
+                    <IngredientFooter ingredient={selectedIngredient} />
+                }
             />
 
             {showScrollToTop && (

@@ -14,19 +14,19 @@ import useFetch from "../hooks/useFetch";
 import { cocktailServices } from "../services/cocktailServices";
 
 interface FooterProps {
-    ingredient: string;
+    glass: string;
 }
-const IngredientsFooter = ({ ingredient }: FooterProps) => {
+const GlassFooter = ({ glass }: FooterProps) => {
     const {
         data: details,
         loading,
         error,
         refetch,
-    } = useFetch(() => cocktailServices.getIngredientByName(ingredient), false);
+    } = useFetch(() => cocktailServices.filterByGlass(glass), false);
 
     useEffect(() => {
         refetch();
-    }, [ingredient, refetch]);
+    }, [glass, refetch]);
 
     if (loading && !details)
         return (
@@ -63,8 +63,8 @@ const IngredientsFooter = ({ ingredient }: FooterProps) => {
                         <View className="relative flex-row items-center justify-start my-5">
                             <Link
                                 href={{
-                                    pathname: "/ingredients/[ingredient]",
-                                    params: { ingredient },
+                                    pathname: "/glasses/[glass]",
+                                    params: { glass },
                                 }}
                                 asChild
                             >
@@ -82,37 +82,17 @@ const IngredientsFooter = ({ ingredient }: FooterProps) => {
                             </Link>
                         </View>
 
+                        <Text className="text-light-100 text-center font-bold text-2xl mb-3">
+                            {glass}
+                        </Text>
+
                         <Image
                             source={{
-                                uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`,
+                                uri: details?.drinks?.[0].strDrinkThumb,
                             }}
                             className="w-full h-[400px]"
                             resizeMode="stretch"
-                            alt={`${ingredient} image`}
-                        />
-
-                        <Text className="text-light-200 font-bold text-2xl">
-                            {ingredient}
-                        </Text>
-
-                        <CocktailInfo
-                            label="Type"
-                            value={details?.ingredients[0].strType}
-                        />
-
-                        <CocktailInfo
-                            label="Alcohol"
-                            value={details?.ingredients[0].strAlcohol}
-                        />
-
-                        <CocktailInfo
-                            label="ABV"
-                            value={details?.ingredients[0].strABV}
-                        />
-
-                        <CocktailInfo
-                            label="Overview"
-                            value={details?.ingredients[0].strDescription}
+                            alt={`${glass} image`}
                         />
                     </View>
                 )}
@@ -121,13 +101,4 @@ const IngredientsFooter = ({ ingredient }: FooterProps) => {
     );
 };
 
-export default IngredientsFooter;
-
-const CocktailInfo = ({ label, value }: CocktailInfoProps) => (
-    <View className="flex-col items-start justify-center mt-5">
-        <Text className="text-light-200 font-normal text-sm">{label}</Text>
-        <Text className="text-light-200 font-bold text-sm mt-2">
-            {value || "N/A"}
-        </Text>
-    </View>
-);
+export default GlassFooter;

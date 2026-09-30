@@ -11,6 +11,7 @@ const endPoints = {
     filterByType: (type: string) => `/filter.php?a=${type}`,
     filterByCategory: (category: string) => `/filter.php?c=${category}`,
     filterByIngredient: (ingredient: string) => `/filter.php?i=${ingredient}`,
+    filterByGlass: (glass: string) => `/filter.php?g=${glass}`,
     listOption: (option: string) => `/list.php?${option}=list`,
 };
 
@@ -85,6 +86,13 @@ async function filterByIngredient(ingredient: string) {
     return { drinks };
 }
 
+async function filterByGlass(glass: string) {
+    const response = await api.get<Cocktails>(endPoints.filterByGlass(glass));
+    const drinks = Array.isArray(response.drinks) ? response.drinks : [];
+
+    return { drinks };
+}
+
 async function getOptions(option: string) {
     const config = optionConfig[option as OptionType];
 
@@ -105,6 +113,7 @@ export const cocktailServices = {
     filterByType,
     filterByCategory,
     filterByIngredient,
+    filterByGlass,
     getOptions,
 };
 
