@@ -2,7 +2,7 @@
     "expo": {
         "name": "Cocktails",
         "slug": "Cocktails",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "orientation": "portrait",
         "icon": "./assets/images/cocktail.png",
         "scheme": "cocktails",
@@ -21,7 +21,7 @@
         },
         "web": {
             "output": "static",
-            "favicon": "./assets/images/cocktail-256x256.png"
+            "favicon": "./assets/images/cocktail.png"
         },
         "plugins": [
             "expo-router",

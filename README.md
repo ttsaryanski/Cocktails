@@ -6,7 +6,7 @@ Discover cocktail recipes, find drinks by name or ingredient, and keep your favo
 
 The Google Play listing will be added after publication:
 
-[Cocktails on Google Play](GOOGLE_PLAY_URL_HERE)
+[Cocktails on Google Play](https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails)
 
 ## Features
 
