@@ -1,9 +1,12 @@
 import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Image,
     Linking,
+    Pressable,
     ScrollView,
+    Share,
     Text,
     TouchableOpacity,
     View,
@@ -19,7 +22,8 @@ import {
     saveLocalCocktail,
 } from "../../utils/storage";
 
-import { useEffect, useState } from "react";
+import Feather from "@expo/vector-icons/Feather";
+
 import { icons } from "../../constants/icons";
 
 const CocktailInfo = ({ label, value }: CocktailInfoProps) => (
@@ -103,6 +107,30 @@ const Details = () => {
         }
     };
 
+    const shareCocktail = async () => {
+        if (!details) return;
+        try {
+            const ingredientList = ingredients
+                .map(({ name, measure }) =>
+                    measure ? `- ${measure} - ${name}` : `- ${name}`,
+                )
+                .join("\n");
+
+            await Share.share({
+                message: [
+                    details.strDrink,
+                    "Ingredients:",
+                    ingredientList || "No ingredients listed.",
+                    "Instructions:",
+                    details.strInstructions || "No instructions available.",
+                    "Cocktails – Bar in Pocket: https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
+                ].join("\n\n"),
+            });
+        } catch (error) {
+            console.error("Error sharing cocktail:", error);
+        }
+    };
+
     return (
         <View className="bg-primary flex-1">
             <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
@@ -130,7 +158,7 @@ const Details = () => {
                             {details?.strVideo && (
                                 <TouchableOpacity
                                     onPress={openVideo}
-                                    className="absolute bottom-5 right-5 rounded-full size-14 bg-indigo-200 flex items-center justify-center"
+                                    className="absolute bottom-5 right-5 rounded-full size-14 bg-light-500 flex items-center justify-center"
                                 >
                                     <Image
                                         source={icons.play}
@@ -139,9 +167,10 @@ const Details = () => {
                                     />
                                 </TouchableOpacity>
                             )}
+
                             <TouchableOpacity
                                 onPress={onSave}
-                                className="absolute bottom-5 left-5 rounded-full size-14 bg-indigo-200 flex items-center justify-center"
+                                className="absolute bottom-5 left-5 rounded-full size-14 bg-light-500 flex items-center justify-center"
                             >
                                 <Image
                                     source={
@@ -154,9 +183,22 @@ const Details = () => {
                         </View>
 
                         <View className="flex-col items-start justify-center mt-5 px-5">
-                            <Text className="text-light-200 font-bold text-xl">
-                                {details?.strDrink}
-                            </Text>
+                            <View className="flex-row items-center justify-between w-full">
+                                <Text className="text-light-200 font-bold text-xl">
+                                    {details?.strDrink}
+                                </Text>
+
+                                <Pressable
+                                    onPress={shareCocktail}
+                                    className="bg-light-500 rounded-full p-3"
+                                >
+                                    <Feather
+                                        name="share-2"
+                                        size={24}
+                                        color="#221F3D"
+                                    />
+                                </Pressable>
+                            </View>
 
                             <CocktailInfo
                                 label="Category"
