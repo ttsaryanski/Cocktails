@@ -6,6 +6,7 @@ import {
     Pressable,
     RefreshControl,
     Text,
+    useWindowDimensions,
     View,
 } from "react-native";
 
@@ -23,6 +24,8 @@ const Glass = () => {
     const { glass } = useLocalSearchParams<{ glass: string }>();
     const router = useRouter();
     const listRef = useRef<FlatList>(null);
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
 
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
@@ -44,7 +47,7 @@ const Glass = () => {
     };
 
     return (
-        <View className="flex-1 bg-primary">
+        <View className={`flex-1 bg-primary ${isLandscape ? "px-12" : ""}`}>
             <Image
                 source={images.bg}
                 className="flex-1 absolute w-full z-0"
@@ -74,7 +77,7 @@ const Glass = () => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     paddingHorizontal: 5,
-                    paddingBottom: 100,
+                    paddingBottom: isLandscape ? 10 : 60,
                 }}
                 refreshControl={
                     <RefreshControl
@@ -140,7 +143,7 @@ const Glass = () => {
                             animated: true,
                         })
                     }
-                    className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                    className={`absolute ${isLandscape ? "right-16 bottom-8" : "right-5 bottom-32"} w-14 h-14 rounded-full bg-dark-100 items-center justify-center`}
                     style={{ elevation: 5 }}
                 >
                     <Ionicons name="arrow-up" size={26} color="#A8B5DB" />

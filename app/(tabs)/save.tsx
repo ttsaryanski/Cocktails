@@ -7,6 +7,7 @@ import {
     Pressable,
     RefreshControl,
     Text,
+    useWindowDimensions,
     View,
 } from "react-native";
 
@@ -26,6 +27,8 @@ import { images } from "../../constants/images";
 const Save = () => {
     const listRef = useRef<FlatList>(null);
     const [showScrollToTop, setShowScrollToTop] = useState(false);
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
 
     const {
         data: savedCocktails,
@@ -67,7 +70,7 @@ const Save = () => {
     };
 
     return (
-        <View className="flex-1 bg-primary">
+        <View className={`flex-1 bg-primary ${isLandscape ? "px-12" : ""}`}>
             <Image source={images.bg} className="absolute w-full z-0" />
 
             <FlatList
@@ -87,7 +90,7 @@ const Save = () => {
                     marginBottom: 10,
                 }}
                 contentContainerStyle={{
-                    paddingBottom: 100,
+                    paddingBottom: isLandscape ? 50 : 100,
                 }}
                 showsVerticalScrollIndicator={false}
                 refreshControl={
@@ -146,7 +149,7 @@ const Save = () => {
                             animated: true,
                         })
                     }
-                    className="absolute bottom-32 right-5 w-14 h-14 rounded-full bg-dark-100 items-center justify-center"
+                    className={`absolute ${isLandscape ? "right-16 bottom-16" : "right-5 bottom-32"} w-14 h-14 rounded-full bg-dark-100 items-center justify-center`}
                     style={{ elevation: 5 }}
                 >
                     <Ionicons name="arrow-up" size={26} color="#A8B5DB" />

@@ -19,6 +19,8 @@ type TabIconProps = {
     isFirst?: boolean;
     isLast?: boolean;
     size?: number;
+    compactTabs?: boolean;
+    isLandscape?: boolean;
 };
 function TabIcon({
     focused,
@@ -27,20 +29,26 @@ function TabIcon({
     isFirst,
     isLast,
     size,
+    compactTabs,
+    isLandscape,
 }: TabIconProps) {
-    const { width } = useWindowDimensions();
-    const compactTabs = width < 350 || PixelRatio.getFontScale() > 1.2;
-
     if (focused) {
         return (
             <ImageBackground
                 source={images.highlight}
-                className={`flex-row w-full flex-1 ${!compactTabs ? "min-w-[120px]" : ""}  min-h-14 my-auto justify-center items-center rounded-full overflow-hidden`}
+                className={`flex-row w-full flex-1 ${!compactTabs || isLandscape ? "min-w-[120px]" : ""}  min-h-14 ${!isLandscape ? "my-auto" : ""} justify-center items-center rounded-full overflow-hidden`}
                 style={
                     !compactTabs && isLast
-                        ? { justifyContent: "flex-start", paddingLeft: 5 }
+                        ? {
+                              ...(!isLandscape
+                                  ? {
+                                        justifyContent: "flex-start",
+                                        paddingLeft: 5,
+                                    }
+                                  : {}),
+                          }
                         : !compactTabs && isFirst
-                          ? { paddingLeft: 20 }
+                          ? { ...(!isLandscape ? { paddingLeft: 20 } : {}) }
                           : {}
                 }
             >
@@ -49,7 +57,7 @@ function TabIcon({
                     tintColor="#151312"
                     className={`${size ? `size-${size}` : "size-5"}`}
                 />
-                {!compactTabs && (
+                {(!compactTabs || isLandscape) && (
                     <Text
                         className="text-secondary text-base font-semibold ml-2"
                         numberOfLines={1}
@@ -63,7 +71,9 @@ function TabIcon({
     }
 
     return (
-        <View className="size-full justify-center items-center mt-4 rounded-full">
+        <View
+            className={`size-full justify-center items-center ${!isLandscape ? "mt-6" : ""} rounded-full`}
+        >
             <Image
                 source={icon}
                 tintColor="#A8B5DB"
@@ -74,6 +84,10 @@ function TabIcon({
 }
 
 export default function TabsLayout() {
+    const { width, height } = useWindowDimensions();
+    const compactTabs = width < 350 || PixelRatio.getFontScale() > 1.2;
+    const isLandscape = width > height;
+
     return (
         <Tabs
             screenOptions={{
@@ -87,8 +101,8 @@ export default function TabsLayout() {
                 tabBarStyle: {
                     backgroundColor: "#221F3D",
                     borderRadius: 50,
-                    marginHorizontal: 5,
-                    marginBottom: 50,
+                    marginHorizontal: isLandscape ? 20 : 5,
+                    marginBottom: isLandscape ? 0 : 50,
                     height: 51,
                     position: "absolute",
                     overflow: "hidden",
@@ -108,6 +122,8 @@ export default function TabsLayout() {
                             icon={icons.home}
                             title="Home"
                             isFirst={true}
+                            compactTabs={compactTabs}
+                            isLandscape={isLandscape}
                         />
                     ),
                 }}
@@ -123,6 +139,8 @@ export default function TabsLayout() {
                             focused={focused}
                             icon={icons.search}
                             title="Search"
+                            compactTabs={compactTabs}
+                            isLandscape={isLandscape}
                         />
                     ),
                 }}
@@ -139,6 +157,8 @@ export default function TabsLayout() {
                             icon={icons.catalog}
                             title="Explore"
                             size={6}
+                            compactTabs={compactTabs}
+                            isLandscape={isLandscape}
                         />
                     ),
                 }}
@@ -154,6 +174,8 @@ export default function TabsLayout() {
                             focused={focused}
                             icon={icons.save}
                             title="Save"
+                            compactTabs={compactTabs}
+                            isLandscape={isLandscape}
                         />
                     ),
                 }}
@@ -170,6 +192,8 @@ export default function TabsLayout() {
                             icon={icons.gear}
                             title="Settings"
                             isLast={true}
+                            compactTabs={compactTabs}
+                            isLandscape={isLandscape}
                         />
                     ),
                 }}

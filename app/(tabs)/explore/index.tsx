@@ -1,15 +1,25 @@
 import { useRouter } from "expo-router";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import {
+    Image,
+    Pressable,
+    ScrollView,
+    Text,
+    useWindowDimensions,
+    View,
+} from "react-native";
 
 import { icons } from "../../../constants/icons";
 import { images } from "../../../constants/images";
 
 const Index = () => {
     const router = useRouter();
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
+
     return (
-        <View className="flex-1 bg-primary">
+        <View className={`flex-1 bg-primary ${isLandscape ? "px-12" : ""}`}>
             <Image
                 source={images.bg}
                 className="flex-1 absolute w-full z-0"
@@ -21,7 +31,7 @@ const Index = () => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     minHeight: "100%",
-                    paddingBottom: 100,
+                    paddingBottom: isLandscape ? 50 : 100,
                 }}
             >
                 <Image

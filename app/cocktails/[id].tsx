@@ -9,6 +9,7 @@ import {
     Share,
     Text,
     TouchableOpacity,
+    useWindowDimensions,
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -38,6 +39,8 @@ const CocktailInfo = ({ label, value }: CocktailInfoProps) => (
 const Details = () => {
     const { id } = useLocalSearchParams();
     const [isSaved, setIsSaved] = useState(false);
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
 
     const { data, loading, error, refetch } = useFetch(async () => {
         const [detailsResponse, savedCocktails] = await Promise.all([
@@ -123,7 +126,8 @@ const Details = () => {
                     ingredientList || "No ingredients listed.",
                     "Instructions:",
                     details.strInstructions || "No instructions available.",
-                    "Cocktails – Bar in Pocket: https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
+                    "Cocktails – Bar in Pocket",
+                    "https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
                 ].join("\n\n"),
             });
         } catch (error) {
@@ -132,8 +136,10 @@ const Details = () => {
     };
 
     return (
-        <View className="bg-primary flex-1">
-            <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+        <View className={`flex-1 bg-primary ${isLandscape ? "px-16" : ""}`}>
+            <ScrollView
+                contentContainerStyle={{ paddingBottom: isLandscape ? 10 : 70 }}
+            >
                 {loading ? (
                     <ActivityIndicator
                         size="large"
@@ -151,7 +157,7 @@ const Details = () => {
                                 source={{
                                     uri: `${details?.strDrinkThumb}`,
                                 }}
-                                className="w-full h-[400px]"
+                                className={`self-center w-full h-[400px]`}
                                 resizeMode="stretch"
                             />
 

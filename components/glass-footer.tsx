@@ -15,8 +15,9 @@ import { cocktailServices } from "../services/cocktailServices";
 
 interface FooterProps {
     glass: string;
+    isLandscape: boolean;
 }
-const GlassFooter = ({ glass }: FooterProps) => {
+const GlassFooter = ({ glass, isLandscape }: FooterProps) => {
     const {
         data: details,
         loading,
@@ -39,7 +40,7 @@ const GlassFooter = ({ glass }: FooterProps) => {
         return (
             <SafeAreaView className="flex-1 items-center justify-center bg-primary px-5">
                 <Text className="text-center text-light-200">
-                    Ingredient not found.
+                    Glass not found.
                 </Text>
             </SafeAreaView>
         );
@@ -47,7 +48,7 @@ const GlassFooter = ({ glass }: FooterProps) => {
 
     return (
         <View className="px-2">
-            <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+            <ScrollView>
                 {loading ? (
                     <ActivityIndicator
                         size="large"
@@ -90,7 +91,7 @@ const GlassFooter = ({ glass }: FooterProps) => {
                             source={{
                                 uri: details?.drinks?.[0].strDrinkThumb,
                             }}
-                            className="w-full h-[400px]"
+                            className={`self-center ${!isLandscape ? "w-full" : "w-[400px]"} h-[400px]`}
                             resizeMode="stretch"
                             alt={`${glass} image`}
                         />

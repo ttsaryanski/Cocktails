@@ -15,8 +15,9 @@ import { cocktailServices } from "../services/cocktailServices";
 
 interface FooterProps {
     ingredient: string;
+    isLandscape: boolean;
 }
-const IngredientsFooter = ({ ingredient }: FooterProps) => {
+const IngredientsFooter = ({ ingredient, isLandscape }: FooterProps) => {
     const {
         data: details,
         loading,
@@ -47,7 +48,7 @@ const IngredientsFooter = ({ ingredient }: FooterProps) => {
 
     return (
         <View className="px-2">
-            <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+            <ScrollView>
                 {loading ? (
                     <ActivityIndicator
                         size="large"
@@ -86,7 +87,7 @@ const IngredientsFooter = ({ ingredient }: FooterProps) => {
                             source={{
                                 uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`,
                             }}
-                            className="w-full h-[400px]"
+                            className={`self-center ${!isLandscape ? "w-full" : "w-[400px]"} h-[400px]`}
                             resizeMode="stretch"
                             alt={`${ingredient} image`}
                         />

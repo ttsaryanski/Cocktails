@@ -1,4 +1,11 @@
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import {
+    FlatList,
+    Image,
+    RefreshControl,
+    Text,
+    useWindowDimensions,
+    View,
+} from "react-native";
 
 import useFetch from "../../hooks/useFetch";
 import { cocktailServices } from "../../services/cocktailServices";
@@ -11,6 +18,9 @@ import { images } from "../../constants/images";
 import { getTrendingCocktails } from "../../utils/appwrite";
 
 export default function Index() {
+    const { width, height } = useWindowDimensions();
+    const isLandscape = width > height;
+
     const {
         data: trendingCocktails,
         loading: trendingLoading,
@@ -30,7 +40,7 @@ export default function Index() {
     };
 
     return (
-        <View className="flex-1 bg-primary">
+        <View className={`flex-1 bg-primary ${isLandscape ? "px-12" : ""}`}>
             <Image
                 source={images.bg}
                 className="absolute w-full z-0"
@@ -42,7 +52,7 @@ export default function Index() {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     minHeight: "100%",
-                    paddingBottom: 100,
+                    paddingBottom: isLandscape ? 50 : 100,
                 }}
                 refreshControl={
                     <RefreshControl

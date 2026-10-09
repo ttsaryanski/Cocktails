@@ -104,3 +104,13 @@ interface Ingredient {
 interface Ingredients {
     ingredients: Ingredient[];
 }
+
+interface Version {
+    id: string;
+    version: string;
+    notes: string[];
+}
+
+interface Versions {
+    versions: Version[];
+}

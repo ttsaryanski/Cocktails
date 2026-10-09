@@ -2,8 +2,8 @@
     "expo": {
         "name": "Cocktails",
         "slug": "Cocktails",
-        "version": "1.0.3",
-        "orientation": "portrait",
+        "version": "1.0.4",
+        "orientation": "default",
         "icon": "./assets/images/cocktail.png",
         "scheme": "cocktails",
         "userInterfaceStyle": "automatic",
@@ -34,7 +34,15 @@
                 }
             ],
             "expo-image",
-            "expo-web-browser"
+            "expo-web-browser",
+            [
+                "expo-build-properties",
+                {
+                    "android": {
+                        "enableMinifyInReleaseBuilds": true
+                    }
+                }
+            ]
         ],
         "experiments": {
             "typedRoutes": true,
