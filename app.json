@@ -2,7 +2,7 @@
     "expo": {
         "name": "Cocktails",
         "slug": "Cocktails",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "orientation": "default",
         "icon": "./assets/images/cocktail.png",
         "scheme": "cocktails",
