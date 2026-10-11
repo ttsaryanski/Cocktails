@@ -66,10 +66,6 @@ const Search = () => {
                 if (!cancelled) {
                     setSearchResults(results);
                 }
-
-                if (results?.drinks?.length > 0 && results?.drinks[0]) {
-                    await updateSearchCount(query, results?.drinks[0]);
-                }
             } catch (error) {
                 if (!cancelled) {
                     setSearchError(
@@ -96,6 +92,14 @@ const Search = () => {
     const loading = query.trim() ? searchLoading : popularLoading;
     const error = query.trim() ? searchError : popularError;
 
+    const handleCocktailPress = (cocktail: Cocktail) => {
+        if (!query.trim()) {
+            return;
+        }
+
+        updateSearchCount(query, cocktail).catch(() => {});
+    };
+
     const handleScroll = (event: any) => {
         const offsetY = event.nativeEvent.contentOffset.y;
 
@@ -115,7 +119,12 @@ const Search = () => {
                 onScroll={handleScroll}
                 scrollEventThrottle={16}
                 data={cocktails?.drinks ?? []}
-                renderItem={({ item }) => <CocktailCard {...item} />}
+                renderItem={({ item }) => (
+                    <CocktailCard
+                        {...item}
+                        onPress={() => handleCocktailPress(item)}
+                    />
+                )}
                 keyExtractor={(item) => item.idDrink.toString()}
                 numColumns={2}
                 columnWrapperStyle={{

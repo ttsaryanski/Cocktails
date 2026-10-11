@@ -15,20 +15,25 @@ const tablesDB = new TablesDB(client);
 
 export const updateSearchCount = async (query: string, cocktail: Cocktail) => {
     try {
+        const cocktailId = Number(cocktail.idDrink);
+        const normalizedQuery = query.trim().toLowerCase();
+
         const result = await tablesDB.listRows({
             databaseId: DATABASE_ID,
             tableId: TABLE_ID,
-            queries: [Query.equal("searchTerm", query)],
+            queries: [Query.equal("cocktail_id", cocktailId), Query.limit(1)],
         });
 
         if (result.rows.length > 0) {
             const existingCocktail = result.rows[0];
+
             await tablesDB.updateRow({
                 databaseId: DATABASE_ID,
                 tableId: TABLE_ID,
                 rowId: existingCocktail.$id,
                 data: {
                     count: existingCocktail.count + 1,
+                    searchTerm: normalizedQuery,
                 },
             });
         } else {
@@ -37,8 +42,8 @@ export const updateSearchCount = async (query: string, cocktail: Cocktail) => {
                 tableId: TABLE_ID,
                 rowId: ID.unique(),
                 data: {
-                    searchTerm: query.toLowerCase(),
-                    cocktail_id: Number(cocktail.idDrink),
+                    searchTerm: normalizedQuery,
+                    cocktail_id: cocktailId,
                     title: cocktail.strDrink,
                     count: 1,
                     img_url: cocktail.strDrinkThumb,
@@ -58,12 +63,12 @@ export const getTrendingCocktails = async (): Promise<
         const result = await tablesDB.listRows({
             databaseId: DATABASE_ID,
             tableId: TABLE_ID,
-            queries: [Query.limit(6), Query.orderDesc("count")],
+            queries: [Query.orderDesc("count"), Query.limit(6)],
         });
 
         return result.rows as unknown as TrendingCocktail[];
     } catch (error) {
-        console.error(error);
+        console.error("Error getting trending cocktails:", error);
         return undefined;
     }
 };
