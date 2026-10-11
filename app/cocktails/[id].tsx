@@ -2,7 +2,6 @@ import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
-    Image,
     Linking,
     Pressable,
     ScrollView,
@@ -16,6 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import useFetch from "../../hooks/useFetch";
 import { cocktailServices } from "../../services/cocktailServices";
+
+import { Image } from "@/utils/expo-image";
 import { extractIngredients } from "../../utils/extractIngredients";
 import {
     deleteLocalCocktail,
@@ -158,7 +159,9 @@ const Details = () => {
                                     uri: `${details?.strDrinkThumb}`,
                                 }}
                                 className={`self-center w-full h-[400px]`}
-                                resizeMode="stretch"
+                                contentFit="fill"
+                                transition={200}
+                                cachePolicy="memory-disk"
                             />
 
                             {details?.strVideo && (
@@ -169,7 +172,7 @@ const Details = () => {
                                     <Image
                                         source={icons.play}
                                         className="w-6 h-7 ml-1"
-                                        resizeMode="stretch"
+                                        contentFit="fill"
                                     />
                                 </TouchableOpacity>
                             )}
@@ -183,7 +186,7 @@ const Details = () => {
                                         isSaved ? icons.saved : icons.unsaved
                                     }
                                     className="w-8 h-8"
-                                    resizeMode="stretch"
+                                    contentFit="fill"
                                 />
                             </TouchableOpacity>
                         </View>

@@ -1,6 +1,8 @@
 import MaskedView from "@react-native-masked-view/masked-view";
 import { Link } from "expo-router";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+
+import { Image } from "@/utils/expo-image";
 
 import { images } from "../constants/images";
 
@@ -18,11 +20,13 @@ const TrendingCocktailCard = ({
                 <Image
                     source={{
                         uri: img_url
-                            ? img_url
+                            ? `${img_url}/preview`
                             : "https://placehold.co/400x400/0F0D23/A8B5DB.png",
                     }}
                     className="w-32 h-48 rounded-lg"
-                    resizeMode="cover"
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="memory-disk"
                 />
 
                 <View className="absolute bottom-14 -left-3.5 px-3 py-1 rounded-full">
@@ -39,7 +43,7 @@ const TrendingCocktailCard = ({
                         <Image
                             source={images.rankingGradient}
                             className="size-14"
-                            resizeMode="cover"
+                            contentFit="cover"
                         />
                     </MaskedView>
                 </View>

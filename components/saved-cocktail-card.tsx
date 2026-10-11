@@ -1,5 +1,7 @@
 import { Link } from "expo-router";
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+
+import { Image } from "@/utils/expo-image";
 
 interface SavedCardProps {
     cocktail: SavedCocktail;
@@ -13,11 +15,13 @@ const SavedCocktailCard = ({
                 <Image
                     source={{
                         uri: img_url
-                            ? img_url
+                            ? `${img_url}/preview`
                             : "https://placehold.co/500x400/0F0D23/A8B5DB.png",
                     }}
                     className="w-full h-52 rounded-lg"
-                    resizeMode="cover"
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="memory-disk"
                 />
 
                 <Text

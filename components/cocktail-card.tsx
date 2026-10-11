@@ -1,5 +1,7 @@
 import { Link } from "expo-router";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+
+import { Image } from "@/utils/expo-image";
 
 const CocktailCard = ({
     idDrink,
@@ -13,11 +15,13 @@ const CocktailCard = ({
                 <Image
                     source={{
                         uri: strDrinkThumb
-                            ? strDrinkThumb
+                            ? `${strDrinkThumb}/preview`
                             : "https://placehold.co/500x400/0F0D23/A8B5DB.png",
                     }}
                     className="w-full h-52 rounded-lg"
-                    resizeMode="cover"
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="memory-disk"
                 />
 
                 <Text

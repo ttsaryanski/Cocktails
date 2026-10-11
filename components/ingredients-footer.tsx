@@ -3,15 +3,17 @@ import { Link } from "expo-router";
 import { useEffect } from "react";
 import {
     ActivityIndicator,
-    Image,
     Pressable,
     ScrollView,
     Text,
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import useFetch from "../hooks/useFetch";
 import { cocktailServices } from "../services/cocktailServices";
+
+import { Image } from "@/utils/expo-image";
 
 interface FooterProps {
     ingredient: string;
@@ -85,10 +87,12 @@ const IngredientsFooter = ({ ingredient, isLandscape }: FooterProps) => {
 
                         <Image
                             source={{
-                                uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}.png`,
+                                uri: `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`,
                             }}
                             className={`self-center ${!isLandscape ? "w-full" : "w-[400px]"} h-[400px]`}
-                            resizeMode="stretch"
+                            contentFit="fill"
+                            transition={200}
+                            cachePolicy="memory-disk"
                             alt={`${ingredient} image`}
                         />
 
