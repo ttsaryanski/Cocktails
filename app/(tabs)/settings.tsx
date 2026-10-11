@@ -9,6 +9,7 @@ import {
     useWindowDimensions,
     View,
 } from "react-native";
+import LanguageSelect from "../../components/language";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -41,8 +42,10 @@ const Settings = () => {
                     Settings
                 </Text>
 
+                <LanguageSelect />
+
                 <Link href="/about" asChild>
-                    <Pressable className="flex-row items-center bg-dark-100 px-2 py-5 w-full rounded-md">
+                    <Pressable className="flex-row items-center bg-dark-100 my-8 px-2 py-5 w-full rounded-md">
                         <MaterialCommunityIcons
                             name="information-variant-circle-outline"
                             size={24}

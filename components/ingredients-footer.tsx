@@ -38,7 +38,11 @@ const IngredientsFooter = ({ ingredient, isLandscape }: FooterProps) => {
             </SafeAreaView>
         );
 
-    if (!loading && !error && !details) {
+    if (
+        !loading &&
+        !error &&
+        (!details || !details?.ingredients || details?.ingredients.length === 0)
+    ) {
         return (
             <SafeAreaView className="flex-1 items-center justify-center bg-primary px-5">
                 <Text className="text-center text-light-200">

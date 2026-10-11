@@ -22,7 +22,7 @@ import { images } from "../../constants/images";
 
 import { versions } from "../../constants/versions";
 
-const Index = () => {
+const About = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const router = useRouter();
     const { width, height } = useWindowDimensions();
@@ -199,4 +199,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default About;

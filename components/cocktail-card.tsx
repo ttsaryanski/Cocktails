@@ -3,14 +3,18 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 import { Image } from "@/utils/expo-image";
 
+type CocktailCardProps = Cocktail & {
+    onPress?: () => void;
+};
 const CocktailCard = ({
     idDrink,
     strDrinkThumb,
     strDrink,
     strAlcoholic,
-}: Cocktail) => {
+    onPress,
+}: CocktailCardProps) => {
     return (
-        <Link href={`/cocktails/${idDrink}`} asChild>
+        <Link href={`/cocktails/${idDrink}`} asChild onPress={onPress}>
             <TouchableOpacity className="w-[45%]">
                 <Image
                     source={{

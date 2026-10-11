@@ -67,6 +67,7 @@ interface TrendingCocktail {
 interface CocktailInfoProps {
     label: string;
     value?: string | number | null;
+    flag?: string;
 }
 
 interface SavedCocktail {

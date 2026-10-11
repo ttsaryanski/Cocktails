@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const COCKTAILS_KEY = "cocktails";
+const LANGUAGE_KEY = "language";
 
 export const getLocalSavedCocktails = async (): Promise<SavedCocktail[]> => {
     const data = await AsyncStorage.getItem(COCKTAILS_KEY);
@@ -32,4 +33,13 @@ export const deleteLocalCocktail = async (id: number): Promise<void> => {
 
 export const deleteAllLocalCocktails = async (): Promise<void> => {
     await AsyncStorage.removeItem(COCKTAILS_KEY);
+};
+
+export const getLocalLanguage = async (): Promise<string | null> => {
+    const data = await AsyncStorage.getItem(LANGUAGE_KEY);
+    return data ? JSON.parse(data) : null;
+};
+
+export const saveLocalLanguage = async (language: string): Promise<void> => {
+    await AsyncStorage.setItem(LANGUAGE_KEY, JSON.stringify(language));
 };

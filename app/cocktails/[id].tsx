@@ -20,6 +20,7 @@ import { Image } from "@/utils/expo-image";
 import { extractIngredients } from "../../utils/extractIngredients";
 import {
     deleteLocalCocktail,
+    getLocalLanguage,
     getLocalSavedCocktails,
     saveLocalCocktail,
 } from "../../utils/storage";
@@ -27,15 +28,7 @@ import {
 import Feather from "@expo/vector-icons/Feather";
 
 import { icons } from "../../constants/icons";
-
-const CocktailInfo = ({ label, value }: CocktailInfoProps) => (
-    <View className="flex-col items-start justify-center mt-5">
-        <Text className="text-light-200 font-normal text-sm">{label}</Text>
-        <Text className="text-light-200 font-bold text-sm mt-2">
-            {value || "N/A"}
-        </Text>
-    </View>
-);
+import { languages } from "../../constants/language";
 
 const Details = () => {
     const { id } = useLocalSearchParams();
@@ -43,11 +36,15 @@ const Details = () => {
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
 
-    const { data, loading, error, refetch } = useFetch(async () => {
-        const [detailsResponse, savedCocktails] = await Promise.all([
-            cocktailServices.getDetails(id as string),
-            getLocalSavedCocktails(),
-        ]);
+    const [language, setLanguage] = useState<string>("en");
+
+    const { data, loading, error } = useFetch(async () => {
+        const [detailsResponse, savedCocktails, localLanguage] =
+            await Promise.all([
+                cocktailServices.getDetails(id as string),
+                getLocalSavedCocktails(),
+                getLocalLanguage(),
+            ]);
 
         const cocktaillId = Number(id);
         return {
@@ -55,17 +52,21 @@ const Details = () => {
             isSaved: savedCocktails.some(
                 (cocktail) => cocktail.cocktail_id === cocktaillId,
             ),
+            language: localLanguage,
         };
     });
 
     useEffect(() => {
         if (data) {
             setIsSaved(data.isSaved);
+            setLanguage(data.language || "en");
         }
     }, [data]);
 
     const details: Cocktail | undefined = data?.detailsResponse.drinks[0];
     const ingredients = details ? extractIngredients(details) : [];
+    const languageFlag = languages.find((item) => item.code === language)?.flag;
+    const instructions = details ? Instructions({ details, language }) : "N/A";
 
     if (loading && !data)
         return (
@@ -126,7 +127,7 @@ const Details = () => {
                     "Ingredients:",
                     ingredientList || "No ingredients listed.",
                     "Instructions:",
-                    details.strInstructions || "No instructions available.",
+                    instructions || "No instructions available.",
                     "Cocktails – Bar in Pocket",
                     "https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
                 ].join("\n\n"),
@@ -255,7 +256,8 @@ const Details = () => {
 
                             <CocktailInfo
                                 label="Overview"
-                                value={details?.strInstructions}
+                                value={instructions}
+                                flag={languageFlag}
                             />
                         </View>
                     </>
@@ -266,3 +268,40 @@ const Details = () => {
 };
 
 export default Details;
+
+const CocktailInfo = ({ label, value, flag }: CocktailInfoProps) => (
+    <View className="flex-col items-start justify-center mt-5">
+        <Text className="text-light-200 font-normal text-sm">
+            {label}
+            {flag && `  ${flag}`}
+        </Text>
+        <Text className="text-light-200 font-bold text-sm mt-2">
+            {value || "N/A"}
+        </Text>
+    </View>
+);
+
+const Instructions = ({
+    details,
+    language,
+}: {
+    details: Cocktail;
+    language: string;
+}): string => {
+    switch (language) {
+        case "es":
+            return details?.strInstructionsES || "N/A";
+        case "de":
+            return details?.strInstructionsDE || "N/A";
+        case "fr":
+            return details?.strInstructionsFR || "N/A";
+        case "it":
+            return details?.strInstructionsIT || "N/A";
+        case "zh-hans":
+            return details?.["strInstructionsZH-HANS"] || "N/A";
+        case "zh-hant":
+            return details?.["strInstructionsZH-HANT"] || "N/A";
+        default:
+            return details?.strInstructions || "N/A";
+    }
+};
