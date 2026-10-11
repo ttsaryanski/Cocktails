@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import useFetch from "../hooks/useFetch";
-import { cocktailServices } from "../services/cocktailServices";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 
 import { Image } from "@/utils/expo-image";
 

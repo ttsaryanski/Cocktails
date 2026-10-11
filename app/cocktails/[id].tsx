@@ -13,22 +13,21 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import useFetch from "../../hooks/useFetch";
-import { cocktailServices } from "../../services/cocktailServices";
-
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 import { Image } from "@/utils/expo-image";
-import { extractIngredients } from "../../utils/extractIngredients";
+import { extractIngredients } from "@/utils/extractIngredients";
 import {
     deleteLocalCocktail,
     getLocalLanguage,
     getLocalSavedCocktails,
     saveLocalCocktail,
-} from "../../utils/storage";
+} from "@/utils/storage";
 
-import Feather from "@expo/vector-icons/Feather";
+import { Feather } from "@expo/vector-icons";
 
-import { icons } from "../../constants/icons";
-import { languages } from "../../constants/language";
+import { icons } from "@/constants/icons";
+import { languages } from "@/constants/language";
 
 const Details = () => {
     const { id } = useLocalSearchParams();

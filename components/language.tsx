@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 
-import { getLocalLanguage, saveLocalLanguage } from "../utils/storage";
+import { getLocalLanguage, saveLocalLanguage } from "@/utils/storage";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import { languages } from "../constants/language";
+import { languages } from "@/constants/language";
 
 const Language = () => {
     const [language, setLanguage] = useState<string>("en");

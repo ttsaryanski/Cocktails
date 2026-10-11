@@ -9,17 +9,17 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../hooks/useFetch";
-import { cocktailServices } from "../../services/cocktailServices";
-import { updateSearchCount } from "../../utils/appwrite";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
+import { updateSearchCount } from "@/utils/appwrite";
 
-import CocktailCard from "../../components/cocktail-card";
-import SearchBar from "../../components/search-bar";
+import CocktailCard from "@/components/cocktail-card";
+import SearchBar from "@/components/search-bar";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Search = () => {
     const listRef = useRef<FlatList>(null);

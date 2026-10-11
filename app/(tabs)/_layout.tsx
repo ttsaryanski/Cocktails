@@ -9,8 +9,8 @@ import {
     View,
 } from "react-native";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 type TabIconProps = {
     focused: boolean;

@@ -7,15 +7,15 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../hooks/useFetch";
-import { cocktailServices } from "../../services/cocktailServices";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
+import { getTrendingCocktails } from "@/utils/appwrite";
 
-import CocktailCard from "../../components/cocktail-card";
+import CocktailCard from "@/components/cocktail-card";
+import TrendingCocktailCard from "@/components/trending-cocktail-card";
 
-import TrendingCocktailCard from "../../components/trending-cocktail-card";
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
-import { getTrendingCocktails } from "../../utils/appwrite";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 export default function Index() {
     const { width, height } = useWindowDimensions();

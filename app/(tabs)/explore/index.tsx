@@ -1,6 +1,4 @@
 import { useRouter } from "expo-router";
-
-import AntDesign from "@expo/vector-icons/AntDesign";
 import {
     Image,
     Pressable,
@@ -10,8 +8,10 @@ import {
     View,
 } from "react-native";
 
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { AntDesign } from "@expo/vector-icons";
+
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Index = () => {
     const router = useRouter();

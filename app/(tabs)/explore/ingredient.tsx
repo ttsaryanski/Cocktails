@@ -12,16 +12,17 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../../hooks/useFetch";
-import { cocktailServices } from "../../../services/cocktailServices";
-import { randomNumber } from "./category";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
+
+import IngredientFooter from "@/components/ingredients-footer";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import IngredientFooter from "../../../components/ingredients-footer";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { randomNumber } from "./category";
 
 const Ingredient = () => {
     const router = useRouter();

@@ -10,15 +10,15 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../hooks/useFetch";
-import { cocktailServices } from "../../services/cocktailServices";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 
-import SavedCocktailCard from "../../components/saved-cocktail-card";
+import SavedCocktailCard from "@/components/saved-cocktail-card";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Ingredient = () => {
     const { ingredient } = useLocalSearchParams<{ ingredient: string }>();

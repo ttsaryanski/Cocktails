@@ -12,16 +12,17 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../../hooks/useFetch";
-import { cocktailServices } from "../../../services/cocktailServices";
-import { randomNumber } from "./category";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
+
+import GlassFooter from "@/components/glass-footer";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import GlassFooter from "../../../components/glass-footer";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { randomNumber } from "./category";
 
 const Glass = () => {
     const router = useRouter();
@@ -102,7 +103,7 @@ const Glass = () => {
                     </TouchableOpacity>
                 )}
                 contentContainerStyle={{
-                    paddingBottom: 70,
+                    paddingBottom: !isLandscape ? 120 : 70,
                 }}
                 keyExtractor={(item) => `${item.value}${randomNumber}`}
                 ListHeaderComponent={

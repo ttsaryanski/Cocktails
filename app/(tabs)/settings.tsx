@@ -9,13 +9,13 @@ import {
     useWindowDimensions,
     View,
 } from "react-native";
-import LanguageSelect from "../../components/language";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import LanguageSelect from "@/components/language";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Settings = () => {
     const { width, height } = useWindowDimensions();

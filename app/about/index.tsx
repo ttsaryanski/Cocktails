@@ -12,15 +12,17 @@ import {
     View,
 } from "react-native";
 
-import EvilIcons from "@expo/vector-icons/EvilIcons";
-import Feather from "@expo/vector-icons/Feather";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+    EvilIcons,
+    Feather,
+    Ionicons,
+    MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
-import { versions } from "../../constants/versions";
+import { versions } from "@/constants/versions";
 
 const About = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -85,7 +87,7 @@ const About = () => {
                         </Text>
 
                         <Text className="text-lg text-light-200 text-left font-bold">
-                            Version 1.0.4
+                            Version {versions[0].version}
                         </Text>
                     </View>
                 </View>

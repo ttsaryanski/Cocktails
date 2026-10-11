@@ -11,18 +11,18 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../hooks/useFetch";
+import useFetch from "@/hooks/useFetch";
 import {
     deleteAllLocalCocktails,
     getLocalSavedCocktails,
-} from "../../utils/storage";
+} from "@/utils/storage";
 
-import SavedCocktailCard from "../../components/saved-cocktail-card";
+import SavedCocktailCard from "@/components/saved-cocktail-card";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 
-import { icons } from "../../constants/icons";
-import { images } from "../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Save = () => {
     const listRef = useRef<FlatList>(null);

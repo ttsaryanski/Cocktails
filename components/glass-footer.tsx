@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import useFetch from "../hooks/useFetch";
-import { cocktailServices } from "../services/cocktailServices";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 
 import { Image } from "@/utils/expo-image";
 
@@ -59,7 +59,7 @@ const GlassFooter = ({ glass, isLandscape }: FooterProps) => {
                     <ActivityIndicator
                         size="large"
                         color="#0000ff"
-                        className="mt-10 self-center"
+                        className="mt-10 mb-20 self-center"
                     />
                 ) : error && !details ? (
                     <Text className="text-red-800 text-center mt-10">

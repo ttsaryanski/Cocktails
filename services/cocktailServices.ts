@@ -1,4 +1,4 @@
-import { api } from "../utils/requester";
+import { api } from "@/utils/requester";
 
 const endPoints = {
     random: "/randomselection.php",

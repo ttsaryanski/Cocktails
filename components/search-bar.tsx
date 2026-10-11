@@ -1,6 +1,6 @@
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 
-import { icons } from "../constants/icons";
+import { icons } from "@/constants/icons";
 
 interface Props {
     onPress?: () => void;

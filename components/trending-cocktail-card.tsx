@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 import { Image } from "@/utils/expo-image";
 
-import { images } from "../constants/images";
+import { images } from "@/constants/images";
 
 interface TrendingCardProps {
     cocktail: TrendingCocktail;

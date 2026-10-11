@@ -11,16 +11,16 @@ import {
     View,
 } from "react-native";
 
-import useFetch from "../../../hooks/useFetch";
-import { cocktailServices } from "../../../services/cocktailServices";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 
-import CategoryCard from "../../../components/option-card";
-import SavedCocktailCard from "../../../components/saved-cocktail-card";
+import CategoryCard from "@/components/option-card";
+import SavedCocktailCard from "@/components/saved-cocktail-card";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const Category = () => {
     const router = useRouter();

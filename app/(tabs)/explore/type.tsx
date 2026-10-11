@@ -1,6 +1,5 @@
 import { useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
-
 import {
     FlatList,
     Image,
@@ -11,17 +10,17 @@ import {
     View,
 } from "react-native";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
+import useFetch from "@/hooks/useFetch";
+import { cocktailServices } from "@/services/cocktailServices";
 
-import useFetch from "../../../hooks/useFetch";
-import { cocktailServices } from "../../../services/cocktailServices";
+import CategoryCard from "@/components/option-card";
+import SavedCocktailCard from "@/components/saved-cocktail-card";
 
-import CategoryCard from "../../../components/option-card";
-import SavedCocktailCard from "../../../components/saved-cocktail-card";
+import { Ionicons } from "@expo/vector-icons";
 
-import { types } from "../../../constants/alcoholic-types";
-import { icons } from "../../../constants/icons";
-import { images } from "../../../constants/images";
+import { types } from "@/constants/alcoholic-types";
+import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
 const ExploreByType = () => {
     const router = useRouter();
