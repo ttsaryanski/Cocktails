@@ -4,6 +4,7 @@ import {
     ImageBackground,
     ImageSourcePropType,
     PixelRatio,
+    Pressable,
     Text,
     useWindowDimensions,
     View,
@@ -92,6 +93,16 @@ export default function TabsLayout() {
         <Tabs
             screenOptions={{
                 tabBarShowLabel: false,
+                tabBarButton: ({ ref: _ref, ...props }) => (
+                    <Pressable
+                        {...props}
+                        android_ripple={{
+                            borderless: false,
+                            foreground: false,
+                            color: "transparent",
+                        }}
+                    />
+                ),
                 tabBarItemStyle: {
                     width: "100%",
                     height: "100%",

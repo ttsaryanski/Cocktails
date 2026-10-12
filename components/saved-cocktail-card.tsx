@@ -13,15 +13,15 @@ const SavedCocktailCard = ({
         <Link href={`/cocktails/${cocktail_id}`} asChild>
             <TouchableOpacity className="w-[30%]">
                 <Image
-                    source={{
-                        uri: img_url
-                            ? `${img_url}/preview`
-                            : "https://placehold.co/500x400/0F0D23/A8B5DB.png",
-                    }}
-                    className="w-full h-52 rounded-lg"
+                    source={
+                        img_url
+                            ? img_url
+                            : "https://placehold.co/500x400/0F0D23/A8B5DB.png"
+                    }
+                    className="w-full h-52 rounded-lg bg-[#0F0D23]"
                     contentFit="cover"
-                    transition={200}
                     cachePolicy="memory-disk"
+                    recyclingKey={String(cocktail_id)}
                 />
 
                 <Text

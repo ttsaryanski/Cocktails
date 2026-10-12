@@ -11,8 +11,10 @@ import {
     useWindowDimensions,
     View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
+    AntDesign,
     EvilIcons,
     Feather,
     Ionicons,
@@ -29,6 +31,7 @@ const About = () => {
     const router = useRouter();
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
+    const insets = useSafeAreaInsets();
 
     const shareApp = async () => {
         try {
@@ -138,14 +141,22 @@ const About = () => {
                 </Pressable>
                 <Modal
                     visible={modalVisible}
+                    statusBarTranslucent
+                    navigationBarTranslucent
                     onRequestClose={() => setModalVisible(!modalVisible)}
                 >
-                    <View className="flex-1 bg-dark-100 justify-center items-center p-2">
+                    <View
+                        className="flex-1 bg-dark-100 items-center p-2"
+                        style={{
+                            paddingTop: insets.top,
+                            paddingBottom: insets.bottom,
+                        }}
+                    >
                         <Text className="text-lg text-light-200 font-bold my-4">
                             Release Notes
                         </Text>
 
-                        <ScrollView>
+                        <ScrollView className="flex-1">
                             {versions.map((version) => (
                                 <View key={version.id} className="mb-4">
                                     <Text className="text-light-200 font-bold">
@@ -166,11 +177,13 @@ const About = () => {
 
                         <Pressable
                             onPress={() => setModalVisible(!modalVisible)}
-                            className="my-4 bg-dark-100 p-2 rounded"
+                            className="my-4 bg-transparent p-3 rounded-full"
                         >
-                            <Text className="text-lg text-light-200 font-bold">
-                                Close
-                            </Text>
+                            <AntDesign
+                                name="close-circle"
+                                size={24}
+                                color="#A8B5DB"
+                            />
                         </Pressable>
                     </View>
                 </Modal>

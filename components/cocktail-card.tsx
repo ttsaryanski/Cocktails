@@ -17,15 +17,15 @@ const CocktailCard = ({
         <Link href={`/cocktails/${idDrink}`} asChild onPress={onPress}>
             <TouchableOpacity className="w-[45%]">
                 <Image
-                    source={{
-                        uri: strDrinkThumb
-                            ? `${strDrinkThumb}/preview`
-                            : "https://placehold.co/500x400/0F0D23/A8B5DB.png",
-                    }}
-                    className="w-full h-52 rounded-lg"
+                    source={
+                        strDrinkThumb
+                            ? strDrinkThumb
+                            : "https://placehold.co/500x400/0F0D23/A8B5DB.png"
+                    }
+                    className="w-full h-52 rounded-lg bg-[#0F0D23]"
                     contentFit="cover"
-                    transition={200}
                     cachePolicy="memory-disk"
+                    recyclingKey={idDrink}
                 />
 
                 <Text

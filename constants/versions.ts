@@ -1,5 +1,10 @@
 export const versions: Version[] = [
     {
+        id: "6",
+        version: "1.0.6",
+        notes: ["Application performance improvements", "Fixed minor bugs"],
+    },
+    {
         id: "5",
         version: "1.0.5",
         notes: [

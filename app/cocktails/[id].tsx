@@ -158,7 +158,7 @@ const Details = () => {
                                 source={{
                                     uri: `${details?.strDrinkThumb}`,
                                 }}
-                                className={`self-center w-full h-[400px]`}
+                                className={`self-center w-full aspect-square`}
                                 contentFit="fill"
                                 transition={200}
                                 cachePolicy="memory-disk"
