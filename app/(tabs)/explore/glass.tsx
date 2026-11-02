@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
     ActivityIndicator,
@@ -31,8 +31,10 @@ const Glass = () => {
     const isLandscape = width > height;
 
     const [query, setQuery] = useState("");
-    const [selectedGlass, setSelectedGlass] =
-        useState<string>("Cocktail glass");
+    const { glass } = useLocalSearchParams<{ glass: string }>();
+    const [selectedGlass, setSelectedGlass] = useState<string>(
+        glass ?? "Cocktail glass",
+    );
     const [showScrollToTop, setShowScrollToTop] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
     const [showAllOptions, setShowAllOptions] = useState(false);
@@ -111,7 +113,7 @@ const Glass = () => {
                         <View className="relative flex-row items-center justify-center">
                             <Pressable
                                 onPress={() => {
-                                    router.back();
+                                    router.push("/explore");
                                 }}
                                 className="absolute left-0 p-3 mt-10"
                             >

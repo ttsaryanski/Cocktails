@@ -31,8 +31,10 @@ const Language = () => {
             >
                 <Ionicons name="language-sharp" size={24} color="#A8B5DB" />
 
-                <Text className="text-light-200 ml-2">Language</Text>
-                <Text className="text-light-200 ml-auto mr-2">
+                <Text className="flex-1 text-lg text-light-200 ml-2 mr-10">
+                    Language
+                </Text>
+                <Text className="text-light-200 ml-auto mr-3">
                     {languages.find((item) => item.code === language)?.flag}
                 </Text>
             </Pressable>

@@ -17,21 +17,24 @@ import {
     AntDesign,
     EvilIcons,
     Feather,
+    FontAwesome6,
     Ionicons,
     MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
+import { applications } from "@/constants/applications";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-
 import { versions } from "@/constants/versions";
 
 const About = () => {
-    const [modalVisible, setModalVisible] = useState(false);
     const router = useRouter();
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
-    const insets = useSafeAreaInsets();
+    const [modalReleaseVisible, setModalReleaseVisible] = useState(false);
+    const insetsRelease = useSafeAreaInsets();
+    const [modalAppsVisible, setModalAppsVisible] = useState(false);
+    const insetsApps = useSafeAreaInsets();
 
     const shareApp = async () => {
         try {
@@ -109,9 +112,16 @@ const About = () => {
                         color="#A8B5DB"
                     />
 
-                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4">
+                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4 mr-10">
                         Rate "Cocktails - Bar in Pocket" on Google Play
                     </Text>
+
+                    <AntDesign
+                        name="caret-right"
+                        size={24}
+                        color="#A8B5DB"
+                        className="ml-auto mr-2"
+                    />
                 </Pressable>
 
                 <Pressable
@@ -120,13 +130,20 @@ const About = () => {
                 >
                     <Feather name="share-2" size={26} color="#A8B5DB" />
 
-                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4">
+                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4 mr-10">
                         Share "Cocktails - Bar in Pocket"
                     </Text>
+
+                    <AntDesign
+                        name="caret-right"
+                        size={24}
+                        color="#A8B5DB"
+                        className="ml-auto mr-2"
+                    />
                 </Pressable>
 
                 <Pressable
-                    onPress={() => setModalVisible(true)}
+                    onPress={() => setModalReleaseVisible(true)}
                     className="flex-row items-center my-8 px-2 pb-5 border-b border-light-200"
                 >
                     <MaterialCommunityIcons
@@ -135,25 +152,34 @@ const About = () => {
                         color="#A8B5DB"
                     />
 
-                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4">
+                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4 mr-10">
                         Release Notes
                     </Text>
+
+                    <AntDesign
+                        name="caret-right"
+                        size={24}
+                        color="#A8B5DB"
+                        className="ml-auto mr-2"
+                    />
                 </Pressable>
                 <Modal
-                    visible={modalVisible}
+                    visible={modalReleaseVisible}
                     statusBarTranslucent
                     navigationBarTranslucent
-                    onRequestClose={() => setModalVisible(!modalVisible)}
+                    onRequestClose={() =>
+                        setModalReleaseVisible(!modalReleaseVisible)
+                    }
                 >
                     <View
                         className="flex-1 bg-dark-100 items-center p-2"
                         style={{
-                            paddingTop: insets.top,
-                            paddingBottom: insets.bottom,
+                            paddingTop: insetsRelease.top,
+                            paddingBottom: insetsRelease.bottom,
                         }}
                     >
                         <Text className="text-lg text-light-200 font-bold my-4">
-                            Release Notes
+                            Release Notes:
                         </Text>
 
                         <ScrollView className="flex-1">
@@ -176,7 +202,89 @@ const About = () => {
                         </ScrollView>
 
                         <Pressable
-                            onPress={() => setModalVisible(!modalVisible)}
+                            onPress={() =>
+                                setModalReleaseVisible(!modalReleaseVisible)
+                            }
+                            className="my-4 bg-transparent p-3 rounded-full"
+                        >
+                            <AntDesign
+                                name="close-circle"
+                                size={24}
+                                color="#A8B5DB"
+                            />
+                        </Pressable>
+                    </View>
+                </Modal>
+
+                <Pressable
+                    onPress={() => setModalAppsVisible(true)}
+                    className="flex-row items-center my-8 px-2 pb-5 border-b border-light-200"
+                >
+                    <FontAwesome6
+                        name="google-play"
+                        size={24}
+                        color="#A8B5DB"
+                    />
+
+                    <Text className="flex-1 text-lg text-light-200 font-bold ml-4 mr-10">
+                        Try more apps
+                    </Text>
+
+                    <AntDesign
+                        name="caret-right"
+                        size={24}
+                        color="#A8B5DB"
+                        className="ml-auto mr-2"
+                    />
+                </Pressable>
+                <Modal
+                    visible={modalAppsVisible}
+                    statusBarTranslucent
+                    navigationBarTranslucent
+                    onRequestClose={() =>
+                        setModalAppsVisible(!modalAppsVisible)
+                    }
+                >
+                    <View
+                        className={`flex-1 bg-dark-100 items-center py-2 ${isLandscape ? "px-16" : "px-2"}`}
+                        style={{
+                            paddingTop: insetsApps.top,
+                            paddingBottom: insetsApps.bottom,
+                        }}
+                    >
+                        <Text className="text-lg text-light-200 font-bold my-4">
+                            More Apps from this Developer
+                        </Text>
+
+                        <ScrollView className="flex-1">
+                            {applications.map((app) => (
+                                <Pressable
+                                    key={app.id}
+                                    onPress={() => Linking.openURL(app.url)}
+                                    className="flex-row w-full items-center my-8 px-2 pb-5 border-b border-light-200"
+                                >
+                                    <Image
+                                        source={icons[app.icon]}
+                                        className="w-10 h-10"
+                                    />
+                                    <Text className=" text-lg text-light-200 font-bold ml-4">
+                                        {app.name}
+                                    </Text>
+
+                                    <AntDesign
+                                        name="caret-right"
+                                        size={24}
+                                        color="#A8B5DB"
+                                        className="ml-auto mr-2"
+                                    />
+                                </Pressable>
+                            ))}
+                        </ScrollView>
+
+                        <Pressable
+                            onPress={() =>
+                                setModalAppsVisible(!modalAppsVisible)
+                            }
                             className="my-4 bg-transparent p-3 rounded-full"
                         >
                             <AntDesign

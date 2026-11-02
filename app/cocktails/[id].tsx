@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -24,8 +24,9 @@ import {
     saveLocalCocktail,
 } from "@/utils/storage";
 
-import { Feather } from "@expo/vector-icons";
+import { AntDesign, Feather } from "@expo/vector-icons";
 
+import { types } from "@/constants/alcoholic-types";
 import { icons } from "@/constants/icons";
 import { languages } from "@/constants/language";
 
@@ -193,13 +194,13 @@ const Details = () => {
 
                         <View className="flex-col items-start justify-center mt-5 px-5">
                             <View className="flex-row items-center justify-between w-full">
-                                <Text className="text-light-200 font-bold text-xl">
+                                <Text className="flex-1 mr-3 text-light-200 font-bold text-xl">
                                     {details?.strDrink}
                                 </Text>
 
                                 <Pressable
                                     onPress={shareCocktail}
-                                    className="bg-light-500 rounded-full p-3"
+                                    className="shrink-0 bg-light-500 rounded-full p-3"
                                 >
                                     <Feather
                                         name="share-2"
@@ -209,29 +210,81 @@ const Details = () => {
                                 </Pressable>
                             </View>
 
-                            <CocktailInfo
-                                label="Category"
-                                value={details?.strCategory}
-                            />
+                            <Link
+                                href={`/explore/category?category=${details?.strCategory}`}
+                                asChild
+                            >
+                                <Pressable className="flex-1 w-full flex-row items-center justify-between">
+                                    <CocktailInfo
+                                        label="Category"
+                                        value={details?.strCategory}
+                                    />
 
-                            {details?.strAlcoholic === "Non alcoholic" ? (
-                                <View className="mt-2 bg-green-800 rounded-md px-2 py-1">
-                                    <Text className="text-xs text-light-200">
-                                        {details?.strAlcoholic}
-                                    </Text>
-                                </View>
-                            ) : (
-                                <View className="mt-2 bg-red-800 rounded-md px-2 py-1">
-                                    <Text className="text-xs text-light-200">
-                                        {details?.strAlcoholic}
-                                    </Text>
-                                </View>
-                            )}
+                                    <AntDesign
+                                        style={{
+                                            alignSelf: "flex-end",
+                                            marginRight: 10,
+                                        }}
+                                        name="caret-right"
+                                        size={24}
+                                        color="#A8B5DB"
+                                    />
+                                </Pressable>
+                            </Link>
 
-                            <CocktailInfo
-                                label="Glass"
-                                value={details?.strGlass}
-                            />
+                            <Link
+                                href={`/explore/type?type=${types.find((type) => type.label === details?.strAlcoholic)?.value ?? ""}`}
+                                asChild
+                            >
+                                <Pressable className="flex-1 w-full flex-row items-center justify-between mt-4">
+                                    {details?.strAlcoholic ===
+                                    "Non alcoholic" ? (
+                                        <View className="bg-green-800 rounded-md px-2 py-1">
+                                            <Text className="text-xs text-light-200">
+                                                {details?.strAlcoholic}
+                                            </Text>
+                                        </View>
+                                    ) : (
+                                        <View className="bg-red-800 rounded-md px-2 py-1">
+                                            <Text className="text-xs text-light-200">
+                                                {details?.strAlcoholic}
+                                            </Text>
+                                        </View>
+                                    )}
+
+                                    <AntDesign
+                                        style={{
+                                            alignSelf: "flex-end",
+                                            marginRight: 10,
+                                        }}
+                                        name="caret-right"
+                                        size={24}
+                                        color="#A8B5DB"
+                                    />
+                                </Pressable>
+                            </Link>
+
+                            <Link
+                                href={`/explore/glass?glass=${details?.strGlass}`}
+                                asChild
+                            >
+                                <Pressable className="flex-1 w-full flex-row items-center justify-between">
+                                    <CocktailInfo
+                                        label="Glass"
+                                        value={details?.strGlass}
+                                    />
+
+                                    <AntDesign
+                                        style={{
+                                            alignSelf: "flex-end",
+                                            marginRight: 10,
+                                        }}
+                                        name="caret-right"
+                                        size={24}
+                                        color="#A8B5DB"
+                                    />
+                                </Pressable>
+                            </Link>
 
                             <Text className="text-light-200 font-normal text-sm mt-5 mb-2">
                                 Ingredients

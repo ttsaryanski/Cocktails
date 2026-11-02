@@ -12,7 +12,11 @@ import {
 
 import LanguageSelect from "@/components/language";
 
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+    AntDesign,
+    Ionicons,
+    MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -52,7 +56,16 @@ const Settings = () => {
                             color="#A8B5DB"
                         />
 
-                        <Text className="text-light-200 ml-2">About</Text>
+                        <Text className="flex-1 text-lg text-light-200 ml-2 mr-10">
+                            About
+                        </Text>
+
+                        <AntDesign
+                            name="caret-right"
+                            size={24}
+                            color="#A8B5DB"
+                            className="ml-auto mr-2"
+                        />
                     </Pressable>
                 </Link>
 
@@ -70,13 +83,15 @@ const Settings = () => {
                         color="#A8B5DB"
                     />
 
-                    <Text className="text-light-200 ml-2">Privacy Policy</Text>
+                    <Text className="flex-1 text-lg text-light-200 ml-2 mr-10">
+                        Privacy Policy
+                    </Text>
 
                     <Ionicons
                         name="open-outline"
                         size={20}
                         color="#A8B5DB"
-                        className="ml-auto"
+                        className="ml-auto mr-2"
                     />
                 </TouchableOpacity>
             </ScrollView>

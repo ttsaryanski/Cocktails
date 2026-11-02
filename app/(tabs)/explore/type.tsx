@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
     FlatList,
@@ -27,8 +27,10 @@ const ExploreByType = () => {
     const listRef = useRef<FlatList>(null);
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
-
-    const [selectedType, setSelectedType] = useState<string>("Alcoholic");
+    const { type } = useLocalSearchParams<{ type: string }>();
+    const [selectedType, setSelectedType] = useState<string>(
+        type ?? "Alcoholic",
+    );
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     const handleScroll = (event: any) => {
@@ -101,7 +103,7 @@ const ExploreByType = () => {
                         <View className="relative flex-row items-center justify-center">
                             <Pressable
                                 onPress={() => {
-                                    router.back();
+                                    router.push("/explore");
                                 }}
                                 className="absolute left-0 p-3 mt-10"
                             >

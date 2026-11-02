@@ -7,6 +7,7 @@ import heartEmpty from "@/assets/icons/heart-empty.png";
 import heart from "@/assets/icons/heart.png";
 import home from "@/assets/icons/home.png";
 import logo from "@/assets/icons/logo.png";
+import meals from "@/assets/icons/meals.png";
 import person from "@/assets/icons/person.png";
 import play from "@/assets/icons/play.png";
 import save from "@/assets/icons/save.png";
@@ -30,4 +31,5 @@ export const icons = {
     heartEmpty,
     gear,
     catalog,
+    meals,
 };

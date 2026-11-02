@@ -111,7 +111,7 @@ const Ingredient = () => {
                         <View className="relative flex-row items-center justify-center">
                             <Pressable
                                 onPress={() => {
-                                    router.back();
+                                    router.push("/explore");
                                 }}
                                 className="absolute left-0 p-3 mt-10"
                             >

@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import {
     ActivityIndicator,
@@ -27,9 +27,10 @@ const Category = () => {
     const listRef = useRef<FlatList>(null);
     const { width, height } = useWindowDimensions();
     const isLandscape = width > height;
-
-    const [selectedCategory, setSelectedCategory] =
-        useState<string>("Cocktail");
+    const { category } = useLocalSearchParams<{ category: string }>();
+    const [selectedCategory, setSelectedCategory] = useState<string>(
+        category ?? "Cocktail",
+    );
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
     const {
@@ -108,7 +109,7 @@ const Category = () => {
                         <View className="relative flex-row items-center justify-center">
                             <Pressable
                                 onPress={() => {
-                                    router.back();
+                                    router.push("/explore");
                                 }}
                                 className="absolute left-0 p-3 mt-10"
                             >
