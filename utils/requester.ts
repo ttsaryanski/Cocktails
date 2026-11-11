@@ -1,5 +1,3 @@
-export const host = `${process.env.EXPO_PUBLIC_BASE_URL}/${process.env.EXPO_PUBLIC_API_KEY}`;
-
 async function requester<T>(
     method: string,
     url: string,
@@ -22,7 +20,7 @@ async function requester<T>(
     }
 
     try {
-        const response = await fetch(host + url, option);
+        const response = await fetch(url, option);
 
         if (!response.ok) {
             const error = await response.json();

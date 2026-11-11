@@ -1,18 +1,21 @@
 import { api } from "@/utils/requester";
 
+export const host = `${process.env.EXPO_PUBLIC_BASE_URL}/${process.env.EXPO_PUBLIC_API_KEY}`;
+
 const endPoints = {
-    random: "/randomselection.php",
-    latest: "/latest.php",
-    popular: "/popular.php",
+    random: `${host}/randomselection.php`,
+    latest: `${host}/latest.php`,
+    popular: `${host}/popular.php`,
     searchByName: (query: string) =>
-        `/search.php?s=${encodeURIComponent(query)}`,
-    searchIngredient: (name: string) => `/search.php?i=${name}`,
-    detailsById: (query: string) => `/lookup.php?i=${query}`,
-    filterByType: (type: string) => `/filter.php?a=${type}`,
-    filterByCategory: (category: string) => `/filter.php?c=${category}`,
-    filterByIngredient: (ingredient: string) => `/filter.php?i=${ingredient}`,
-    filterByGlass: (glass: string) => `/filter.php?g=${glass}`,
-    listOption: (option: string) => `/list.php?${option}=list`,
+        `${host}/search.php?s=${encodeURIComponent(query)}`,
+    searchIngredient: (name: string) => `${host}/search.php?i=${name}`,
+    detailsById: (query: string) => `${host}/lookup.php?i=${query}`,
+    filterByType: (type: string) => `${host}/filter.php?a=${type}`,
+    filterByCategory: (category: string) => `${host}/filter.php?c=${category}`,
+    filterByIngredient: (ingredient: string) =>
+        `${host}/filter.php?i=${ingredient}`,
+    filterByGlass: (glass: string) => `${host}/filter.php?g=${glass}`,
+    listOption: (option: string) => `${host}/list.php?${option}=list`,
 };
 
 async function getRandom() {

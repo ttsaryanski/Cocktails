@@ -11,7 +11,7 @@ import {
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
-import { updateSearchCount } from "@/utils/appwrite";
+import { trendServices } from "@/services/trendServices";
 
 import CocktailCard from "@/components/cocktail-card";
 import SearchBar from "@/components/search-bar";
@@ -92,12 +92,12 @@ const Search = () => {
     const loading = query.trim() ? searchLoading : popularLoading;
     const error = query.trim() ? searchError : popularError;
 
-    const handleCocktailPress = (cocktail: Cocktail) => {
+    const handleCocktailPress = (cocktail: IncrementCountData) => {
         if (!query.trim()) {
             return;
         }
 
-        updateSearchCount(query, cocktail).catch(() => {});
+        trendServices.incrementCount(cocktail).catch(() => {});
     };
 
     const handleScroll = (event: any) => {
@@ -122,7 +122,13 @@ const Search = () => {
                 renderItem={({ item }) => (
                     <CocktailCard
                         {...item}
-                        onPress={() => handleCocktailPress(item)}
+                        onPress={() =>
+                            handleCocktailPress({
+                                title: item.strDrink,
+                                cocktail_id: Number(item.idDrink),
+                                img_url: item.strDrinkThumb,
+                            })
+                        }
                     />
                 )}
                 keyExtractor={(item) => item.idDrink.toString()}
@@ -184,7 +190,7 @@ const Search = () => {
                                     : "Start typing to search for cocktails"}
                             </Text>
                         </View>
-                    ) : null
+                    ) : undefined
                 }
             />
 

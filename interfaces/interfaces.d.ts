@@ -64,6 +64,12 @@ interface TrendingCocktail {
     img_url: string;
 }
 
+interface IncrementCountData {
+    cocktail_id: number;
+    title: string;
+    img_url: string;
+}
+
 interface CocktailInfoProps {
     label: string;
     value?: string | number | null;

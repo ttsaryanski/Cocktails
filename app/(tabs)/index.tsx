@@ -9,7 +9,7 @@ import {
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
-import { getTrendingCocktails } from "@/utils/appwrite";
+import { trendServices } from "@/services/trendServices";
 
 import CocktailCard from "@/components/cocktail-card";
 import TrendingCocktailCard from "@/components/trending-cocktail-card";
@@ -26,7 +26,7 @@ export default function Index() {
         loading: trendingLoading,
         error: trendingError,
         refetch: trendingRefetch,
-    } = useFetch(getTrendingCocktails);
+    } = useFetch(trendServices.getTrending);
 
     const {
         data: cocktails,
@@ -61,7 +61,7 @@ export default function Index() {
                         tintColor="#AB8BFF"
                     />
                 }
-                data={cocktails?.drinks}
+                data={cocktails?.drinks ?? []}
                 renderItem={({ item }) => <CocktailCard {...item} />}
                 keyExtractor={(item) => item.idDrink.toString()}
                 numColumns={2}
@@ -86,7 +86,7 @@ export default function Index() {
                                     horizontal
                                     showsHorizontalScrollIndicator={false}
                                     className="mb-4 mt-3"
-                                    data={trendingCocktails}
+                                    data={trendingCocktails ?? []}
                                     contentContainerStyle={{
                                         paddingRight: 20,
                                     }}

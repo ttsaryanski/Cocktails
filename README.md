@@ -1,10 +1,8 @@
-# Cocktails
+# Cocktails - Bar in Pocket
 
 Discover cocktail recipes, find drinks by name or ingredient, and keep your favorites close at hand. Cocktails brings recipe discovery and preparation details together in a simple mobile app.
 
 ## Get the app
-
-The Google Play listing will be added after publication:
 
 [Cocktails on Google Play](https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails)
 
@@ -27,13 +25,24 @@ The Google Play listing will be added after publication:
 | ----------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------- |
 | ![Cocktail details](assets/screenshots/details-nosaved.jpg) | ![Saved cocktails](assets/screenshots/saved.jpg) | ![Cocktail details with video](assets/screenshots/details-video.jpg) |
 
+## Built with
+
+- [Expo](https://expo.dev/) and [React Native](https://reactnative.dev/)
+- [Expo Router](https://docs.expo.dev/router/introduction/) for file-based navigation
+- [TypeScript](https://www.typescriptlang.org/)
+- [NativeWind](https://www.nativewind.dev/) for utility-style React Native styling
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) for locally saved cocktails
+- [TheCocktailDB API](https://www.thecocktaildb.com/api.php) for cocktails recipes
+- A separately hosted trending service for popular searches
+
 ## Run locally
 
 ### Requirements
 
 - Node.js and npm
-- Expo-compatible Android or iOS development environment, or a web browser
-- API and Appwrite project configuration (see below)
+- TheCocktailDB API access
+- A deployed trending service that provides `/top` and `/increment` endpoints
+- Expo Go for running the app on a physical device, or an Android/iOS simulator
 
 ### Setup
 
@@ -66,25 +75,12 @@ The app reads its public API and Appwrite configuration from Expo environment va
 ```dotenv
 EXPO_PUBLIC_BASE_URL=
 EXPO_PUBLIC_API_KEY=
-EXPO_PUBLIC_APPWRITE_PLATFORM=
-EXPO_PUBLIC_APPWRITE_PROJECT_REGION=
-EXPO_PUBLIC_APPWRITE_PROJECT_ID=
-EXPO_PUBLIC_APPWRITE_DATABASE_ID=
-EXPO_PUBLIC_APPWRITE_TABLE_ID=
+EXPO_PUBLIC_TRENDING_API_URL=
 ```
 
-`EXPO_PUBLIC_BASE_URL` and `EXPO_PUBLIC_API_KEY` configure the cocktail recipe API. The Appwrite values configure the project, database, and table used to record searches and display trending cocktails. Saved cocktails are stored locally on the device.
+`EXPO_PUBLIC_BASE_URL` and `EXPO_PUBLIC_API_KEY` configure the cocktail recipe API. `EXPO_PUBLIC_TRENDING_API_URL` is selfhosted service used to record searches and display trending cocktails. Saved cocktails are stored locally on the device.
 
 Expo public environment variables are bundled into the client app. Do not put private keys, passwords, or other server-side secrets in these variables.
-
-## Built with
-
-- [Expo](https://expo.dev/) and [React Native](https://reactnative.dev/)
-- [Expo Router](https://docs.expo.dev/router/introduction/) for file-based navigation
-- [TypeScript](https://www.typescriptlang.org/)
-- [NativeWind](https://www.nativewind.dev/) for utility-style React Native styling
-- [Appwrite](https://appwrite.io/) for search statistics and trending cocktails
-- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/) for locally saved cocktails
 
 # Welcome to your Expo app 👋
 
@@ -142,3 +138,19 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Data and privacy
+
+Cocktails recipes are fetched from TheCocktailDB. Saved recipes are stored locally on the device using AsyncStorage. Trending results and search counts are provided by the configured trending service.
+
+## Help and contributions
+
+For help or to report a problem, open an issue in the repository where you found this project. Contributions are welcome: open a pull request with a clear description of the change and any relevant testing.
+
+## Maintainers
+
+This project is maintained by its repository owner and contributors. See the repository's issue tracker for support and project discussions.
+
+## License
+
+See [LICENSE](LICENSE) for the license included with this repository.
