@@ -17,12 +17,27 @@ export default function RootLayout() {
                 />
 
                 <Stack.Screen
+                    name="types/[type]"
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                    name="categories/[category]"
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
                     name="ingredients/[ingredient]"
                     options={{ headerShown: false }}
                 />
 
                 <Stack.Screen
                     name="glasses/[glass]"
+                    options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                    name="glasses/list/[glass]"
                     options={{ headerShown: false }}
                 />
 

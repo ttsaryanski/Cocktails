@@ -4,6 +4,8 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
     Pressable,
     Text,
     TextInput,
@@ -14,6 +16,7 @@ import {
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
+import { randomNumber } from "@/utils/random-number";
 
 import IngredientFooter from "@/components/ingredients-footer";
 
@@ -21,8 +24,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
-
-import { randomNumber } from "./category";
 
 const Ingredient = () => {
     const router = useRouter();
@@ -55,7 +56,7 @@ const Ingredient = () => {
         refetch();
     }, [selectedIngredient, refetch]);
 
-    const handleScroll = (event: any) => {
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const offsetY = event.nativeEvent.contentOffset.y;
 
         setShowScrollToTop(offsetY > 400);

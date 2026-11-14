@@ -128,7 +128,7 @@ const Details = () => {
                     ingredientList || "No ingredients listed.",
                     "Instructions:",
                     instructions || "No instructions available.",
-                    "Cocktails – Bar in Pocket",
+                    "Cocktails - Bar in Pocket",
                     "https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
                 ].join("\n\n"),
             });
@@ -211,7 +211,12 @@ const Details = () => {
                             </View>
 
                             <Link
-                                href={`/explore/category?category=${details?.strCategory}`}
+                                href={{
+                                    pathname: "/categories/[category]",
+                                    params: {
+                                        category: details?.strCategory ?? "",
+                                    },
+                                }}
                                 asChild
                             >
                                 <Pressable className="flex-1 w-full flex-row items-center justify-between">
@@ -233,7 +238,17 @@ const Details = () => {
                             </Link>
 
                             <Link
-                                href={`/explore/type?type=${types.find((type) => type.label === details?.strAlcoholic)?.value ?? ""}`}
+                                href={{
+                                    pathname: "/types/[type]",
+                                    params: {
+                                        type:
+                                            types.find(
+                                                (type) =>
+                                                    type.label ===
+                                                    details?.strAlcoholic,
+                                            )?.value ?? "",
+                                    },
+                                }}
                                 asChild
                             >
                                 <Pressable className="flex-1 w-full flex-row items-center justify-between mt-4">
@@ -265,7 +280,10 @@ const Details = () => {
                             </Link>
 
                             <Link
-                                href={`/explore/glass?glass=${details?.strGlass}`}
+                                href={{
+                                    pathname: `/glasses/list/[glass]`,
+                                    params: { glass: details?.strGlass ?? "" },
+                                }}
                                 asChild
                             >
                                 <Pressable className="flex-1 w-full flex-row items-center justify-between">

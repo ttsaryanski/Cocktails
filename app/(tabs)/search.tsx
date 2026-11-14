@@ -3,6 +3,8 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
     Pressable,
     Text,
     useWindowDimensions,
@@ -100,7 +102,7 @@ const Search = () => {
         trendServices.incrementCount(cocktail).catch(() => {});
     };
 
-    const handleScroll = (event: any) => {
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const offsetY = event.nativeEvent.contentOffset.y;
 
         setShowScrollToTop(offsetY > 400);

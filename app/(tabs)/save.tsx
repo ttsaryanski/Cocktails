@@ -4,6 +4,8 @@ import {
     Alert,
     FlatList,
     Image,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
     Pressable,
     RefreshControl,
     Text,
@@ -17,7 +19,7 @@ import {
     getLocalSavedCocktails,
 } from "@/utils/storage";
 
-import SavedCocktailCard from "@/components/saved-cocktail-card";
+import SavedCocktailCard from "@/components/cocktail-saved-card";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -63,7 +65,7 @@ const Save = () => {
         ]);
     };
 
-    const handleScroll = (event: any) => {
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const offsetY = event.nativeEvent.contentOffset.y;
 
         setShowScrollToTop(offsetY > 400);

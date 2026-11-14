@@ -1,10 +1,19 @@
 import MaskedView from "@react-native-masked-view/masked-view";
 import { Link } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import type { ComponentType, ReactElement, ReactNode } from "react";
+import { Text, TouchableOpacity, View, type ViewProps } from "react-native";
 
 import { Image } from "@/utils/expo-image";
 
 import { images } from "@/constants/images";
+
+type CompatibleMaskedViewProps = ViewProps & {
+    maskElement: ReactElement;
+    children?: ReactNode;
+    androidRenderingMode?: "software" | "hardware";
+};
+
+const CompatibleMaskedView = MaskedView as unknown as ComponentType<CompatibleMaskedViewProps>;
 
 interface TrendingCardProps {
     cocktail: TrendingCocktail;
@@ -30,7 +39,7 @@ const TrendingCocktailCard = ({
                 />
 
                 <View className="absolute bottom-14 -left-3.5 px-3 py-1 rounded-full">
-                    <MaskedView
+                    <CompatibleMaskedView
                         maskElement={
                             <Text
                                 className="font-bold text-light-200 text-6xl"
@@ -45,7 +54,7 @@ const TrendingCocktailCard = ({
                             className="size-14"
                             contentFit="cover"
                         />
-                    </MaskedView>
+                    </CompatibleMaskedView>
                 </View>
 
                 <Text

@@ -12,7 +12,7 @@ import { cocktailServices } from "@/services/cocktailServices";
 import { trendServices } from "@/services/trendServices";
 
 import CocktailCard from "@/components/cocktail-card";
-import TrendingCocktailCard from "@/components/trending-cocktail-card";
+import TrendingCocktailCard from "@/components/cocktail-trending-card";
 
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";

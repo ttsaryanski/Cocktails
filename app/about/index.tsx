@@ -40,7 +40,7 @@ const About = () => {
         try {
             await Share.share({
                 message: [
-                    "Cocktails – Bar in Pocket",
+                    "Cocktails - Bar in Pocket",
                     "https://play.google.com/store/apps/details?id=com.ttsaryanski.cocktails",
                 ].join("\n\n"),
             });

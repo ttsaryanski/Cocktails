@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import {
     FlatList,
     Image,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
     Pressable,
     RefreshControl,
     Text,
@@ -13,7 +15,7 @@ import {
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
 
-import SavedCocktailCard from "@/components/saved-cocktail-card";
+import SavedCocktailCard from "@/components/cocktail-saved-card";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -40,7 +42,7 @@ const Ingredient = () => {
         cocktailsRefetch();
     }, [ingredient, cocktailsRefetch]);
 
-    const handleScroll = (event: any) => {
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const offsetY = event.nativeEvent.contentOffset.y;
 
         setShowScrollToTop(offsetY > 400);

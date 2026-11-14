@@ -14,7 +14,7 @@ const CategoryCard = ({
 }: CategoryCardProps) => {
     return (
         <TouchableOpacity
-            className={`w-content relative px-5 py-2 rounded-full ${focused ? "bg-light-200" : "bg-dark-100"}`}
+            className={`w-full items-center px-5 py-2 rounded-full ${focused ? "bg-light-200" : "bg-dark-100"}`}
             onPress={onPress}
         >
             <Text
