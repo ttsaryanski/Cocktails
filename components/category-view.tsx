@@ -4,18 +4,17 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
-    type NativeScrollEvent,
-    type NativeSyntheticEvent,
     Pressable,
     RefreshControl,
     Text,
     useWindowDimensions,
     View,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
 } from "react-native";
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
-import { randomNumber } from "@/utils/random-number";
 
 import CategoryCard from "@/components/category-option-card";
 import SavedCocktailCard from "@/components/cocktail-saved-card";
@@ -202,9 +201,7 @@ const CategoryView = ({
                                             />
                                         </View>
                                     )}
-                                    keyExtractor={(item) =>
-                                        `${item.value}${randomNumber}`
-                                    }
+                                    keyExtractor={(item) => item.value}
                                 />
                             </View>
                         )}

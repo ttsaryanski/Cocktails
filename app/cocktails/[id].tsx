@@ -46,11 +46,10 @@ const Details = () => {
                 getLocalLanguage(),
             ]);
 
-        const cocktaillId = Number(id);
         return {
             detailsResponse,
             isSaved: savedCocktails.some(
-                (cocktail) => cocktail.cocktail_id === cocktaillId,
+                (cocktail) => cocktail.cocktail_id == id,
             ),
             language: localLanguage,
         };
@@ -97,14 +96,12 @@ const Details = () => {
             return;
         }
 
-        const cocktailId = Number(details.idDrink);
-
         if (isSaved) {
-            await deleteLocalCocktail(cocktailId);
+            await deleteLocalCocktail(details.idDrink);
             setIsSaved(false);
         } else {
             await saveLocalCocktail({
-                cocktail_id: cocktailId,
+                cocktail_id: details.idDrink,
                 title: details.strDrink,
                 img_url: details.strDrinkThumb ?? "",
             });

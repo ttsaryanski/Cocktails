@@ -16,7 +16,6 @@ import {
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
-import { randomNumber } from "@/utils/random-number";
 
 import IngredientFooter from "@/components/ingredients-footer";
 
@@ -106,7 +105,7 @@ const Ingredient = () => {
                 contentContainerStyle={{
                     paddingBottom: isLandscape ? 110 : 170,
                 }}
-                keyExtractor={(item) => `${item.value}${randomNumber}`}
+                keyExtractor={(item) => item.value}
                 ListHeaderComponent={
                     <>
                         <View className="relative flex-row items-center justify-center">

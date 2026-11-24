@@ -127,7 +127,7 @@ const Search = () => {
                         onPress={() =>
                             handleCocktailPress({
                                 title: item.strDrink,
-                                cocktail_id: Number(item.idDrink),
+                                cocktail_id: item.idDrink,
                                 img_url: item.strDrinkThumb,
                             })
                         }

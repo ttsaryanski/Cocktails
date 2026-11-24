@@ -23,11 +23,9 @@ export const saveLocalCocktail = async (
     return newCocktail;
 };
 
-export const deleteLocalCocktail = async (id: number): Promise<void> => {
+export const deleteLocalCocktail = async (id: string): Promise<void> => {
     const cocktails = await getLocalSavedCocktails();
-    const filtered = cocktails.filter(
-        (cocktail) => cocktail.cocktail_id !== id,
-    );
+    const filtered = cocktails.filter((cocktail) => cocktail.cocktail_id != id);
     await AsyncStorage.setItem(COCKTAILS_KEY, JSON.stringify(filtered));
 };
 

@@ -4,19 +4,18 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
-    type NativeScrollEvent,
-    type NativeSyntheticEvent,
     Pressable,
     Text,
     TextInput,
     TouchableOpacity,
     useWindowDimensions,
     View,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
 } from "react-native";
 
 import useFetch from "@/hooks/useFetch";
 import { cocktailServices } from "@/services/cocktailServices";
-import { randomNumber } from "@/utils/random-number";
 
 import GlassFooter from "@/components/glass-footer";
 
@@ -116,7 +115,7 @@ const GlassView = ({
                 contentContainerStyle={{
                     paddingBottom: !isLandscape ? 120 : 70,
                 }}
-                keyExtractor={(item) => `${item.value}${randomNumber}`}
+                keyExtractor={(item) => item.value}
                 ListHeaderComponent={
                     <>
                         <View className="relative flex-row items-center justify-center">

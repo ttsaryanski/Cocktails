@@ -1,10 +1,10 @@
 import { Tabs } from "expo-router";
 import {
     Image,
-    ImageBackground,
     ImageSourcePropType,
     PixelRatio,
     Pressable,
+    StyleSheet,
     Text,
     useWindowDimensions,
     View,
@@ -35,9 +35,8 @@ function TabIcon({
 }: TabIconProps) {
     if (focused) {
         return (
-            <ImageBackground
-                source={images.highlight}
-                className={`flex-row w-full flex-1 ${!compactTabs || isLandscape ? "min-w-[120px]" : ""}  min-h-14 ${!isLandscape ? "my-auto" : ""} justify-center items-center rounded-full overflow-hidden`}
+            <View
+                className={`relative flex-row w-full flex-1 ${!compactTabs || isLandscape ? "min-w-[120px]" : ""}  min-h-14 ${!isLandscape ? "my-auto" : ""} justify-center items-center rounded-full overflow-hidden`}
                 style={
                     !compactTabs && isLast
                         ? {
@@ -54,6 +53,12 @@ function TabIcon({
                 }
             >
                 <Image
+                    source={images.highlight}
+                    resizeMode="cover"
+                    style={StyleSheet.absoluteFill}
+                />
+
+                <Image
                     source={icon}
                     tintColor="#151312"
                     className={`${size ? `size-${size}` : "size-5"}`}
@@ -67,7 +72,7 @@ function TabIcon({
                         {title}
                     </Text>
                 )}
-            </ImageBackground>
+            </View>
         );
     }
 

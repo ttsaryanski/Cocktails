@@ -57,15 +57,14 @@ interface Cocktail {
 }
 
 interface TrendingCocktail {
-    searchTerm: string;
-    cocktail_id: number;
+    cocktail_id: string;
     title: string;
     count: number;
     img_url: string;
 }
 
 interface IncrementCountData {
-    cocktail_id: number;
+    cocktail_id: string;
     title: string;
     img_url: string;
 }
@@ -77,7 +76,7 @@ interface CocktailInfoProps {
 }
 
 interface SavedCocktail {
-    cocktail_id: number;
+    cocktail_id: string;
     title: string;
     img_url: string;
     createdAt: string;
